@@ -17,5 +17,147 @@
 
     <title>DogInsta</title>
   </head>
-  <body></body>
+  <body>
+    <div class="container">
+      <header class="header">
+        <img src="src/img/logo.png" alt="Logo" class="header__logo" />
+        <nav class="nav">
+          <ul class="nav__list">
+            <li class="nav__item">
+              <button class="nav__btn nav__btn--add-post">
+                <svg class="nav__icon">
+                  <use href="src/img/icons.svg#icon-add"></use>
+                </svg>
+              </button>
+            </li>
+            <li class="nav__item">
+              <button class="nav__btn nav__btn--favorite">
+                <svg class="nav__icon">
+                  <use href="src/img/icons.svg#icon-favorite"></use>
+                </svg>
+              </button>
+            </li>
+            <li class="nav__item">
+              <button class="nav__btn nav__btn--bookmarks">
+                <svg class="nav__icon">
+                  <use href="src/img/icons.svg#icon-bookmark"></use>
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </header>
+
+      <main class="post__content">
+        <div class="post__top">
+          <img
+            src="https://avatars.githubusercontent.com/u/26410548?v=4"
+            alt="Account icon" />
+          <button class="post__top-btn post__top--more">
+            <svg class="post__top-icon">
+              <use href="src/img/icons.svg#icon-more"></use>
+            </svg>
+          </button>
+        </div>
+        <div class="post__photo">
+          <img
+            src="https://images.dog.ceo/breeds/bulldog-boston/n02096585_10452.jpg"
+            alt="Post photo" />
+        </div>
+        <div class="post__bot">
+          <section class="post__buttons">
+            <div class="buttons--left">
+              <button class="btn--favorite">
+                <svg>
+                  <use href="src/img/icons.svg#icon-favorite"></use>
+                </svg>
+              </button>
+              <button class="btn--comment">
+                <svg>
+                  <use href="src/img/icons.svg#icon-comment"></use>
+                </svg>
+              </button>
+              <button class="btn--send">
+                <svg>
+                  <use href="src/img/icons.svg#icon-send"></use>
+                </svg>
+              </button>
+            </div>
+            <div class="buttons--right">
+              <button class="btn--bookmark">
+                <svg>
+                  <use href="src/img/icons.svg#icon-bookmark"></use>
+                </svg>
+              </button>
+            </div>
+          </section>
+          <section class="post__likes">
+            <div class="post__likes-count">
+              <span class="post__likes-data">2137</span>
+              <span class="post__likes-text">likes</span>
+            </div>
+          </section>
+          <section class="post__description">
+            <details>
+              <summary>
+                <h2 class="post__description-username">Aislinn</h2>
+                <span class="post__description-text">Her daily goal...</span>
+                <span class="post__description-btn">more</span>
+              </summary>
+              <div>
+                <!-- prettier-ignore -->
+                <span class="post__description-text">Her daily goal was to improve on yesterday.</span>
+                <!-- <span class="post__description-btn"> hide</span> -->
+              </div>
+            </details>
+          </section>
+          <section class="post-comments">
+            <b>View 6 comments</b>
+          </section>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <nav class="nav">
+          <ul class="nav__list">
+            <li class="nav__item">
+              <button class="nav__btn nav__btn--home-page">
+                <svg class="nav__icon">
+                  <use href="src/img/icons.svg#icon-home-page"></use>
+                </svg>
+              </button>
+            </li>
+            <li class="nav__item">
+              <button class="nav__btn nav__btn--search">
+                <svg class="nav__icon">
+                  <use href="src/img/icons.svg#icon-search"></use>
+                </svg>
+              </button>
+            </li>
+            <li class="nav__item">
+              <button class="nav__btn nav__btn--video">
+                <svg class="nav__icon">
+                  <use href="src/img/icons.svg#icon-video"></use>
+                </svg>
+              </button>
+            </li>
+            <li class="nav__item">
+              <button class="nav__btn nav__btn--shopping-bag">
+                <svg class="nav__icon">
+                  <use href="src/img/icons.svg#icon-shopping-bag"></use>
+                </svg>
+              </button>
+            </li>
+            <li class="nav__item">
+              <button class="nav__btn nav__btn--account">
+                <svg class="nav__icon">
+                  <use href="src/img/icons.svg#icon-account"></use>
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </footer>
+    </div>
+  </body>
 </html>

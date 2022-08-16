@@ -33,12 +33,12 @@
 <path fill="black" d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"></path>
 </symbol>
 
-<symbol id="icon-home" viewBox="0 0 24 24">
-<path fill="black" d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+<symbol id="icon-home-page" viewBox="0 0 24 24">
+<path fill="black" d="m12 5.69 5 4.5V18h-2v-6H9v6H7v-7.81l5-4.5M12 3 2 12h3v8h6v-6h2v6h6v-8h3L12 3z"></path>
 </symbol>
 
-<symbol id="icon-home-fill" viewBox="0 0 24 24">
-<path fill="black" d="m12 5.69 5 4.5V18h-2v-6H9v6H7v-7.81l5-4.5M12 3 2 12h3v8h6v-6h2v6h6v-8h3L12 3z"></path>
+<symbol id="icon-home-page-fill" viewBox="0 0 24 24">
+<path fill="black" d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
 </symbol>
 
 <symbol id="icon-search" viewBox="0 0 24 24">
