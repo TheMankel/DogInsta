@@ -2,10 +2,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 8px;
+  margin: 8px 0 0;
+  border-bottom: 2px solid #ededed;
 
   &__logo {
     height: 48px;
+    margin-left: 8px;
   }
 
   .nav {
@@ -14,11 +16,13 @@
     //   width: 32px;
     //   margin: 8px;
     // }
+    margin-right: 16px;
 
     &__list {
       list-style: none;
       display: flex;
       justify-content: space-around;
+      gap: 12px;
     }
 
     &__item {
@@ -34,7 +38,6 @@
       svg {
         height: 32px;
         width: 32px;
-        margin-right: 12px;
       }
 
       &:hover {

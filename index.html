@@ -7,8 +7,11 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
+    <!-- <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet" /> -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet" />
     <link rel="shortcut icon" href="src/img/favicon.png" type="image/x-icon" />
 
@@ -50,9 +53,13 @@
 
       <main class="post__content">
         <div class="post__top">
-          <img
-            src="https://avatars.githubusercontent.com/u/26410548?v=4"
-            alt="Account icon" />
+          <div class="post__top-user">
+            <img
+              src="https://pyrek.pl/wp-content/uploads/2021/04/papaj.jpg"
+              alt="Account icon"
+              class="post__top-user--img" />
+            <span class="post__top-user--name">Jan Pawlacz</span>
+          </div>
           <button class="post__top-btn post__top--more">
             <svg class="post__top-icon">
               <use href="src/img/icons.svg#icon-more"></use>
@@ -64,27 +71,28 @@
             src="https://images.dog.ceo/breeds/bulldog-boston/n02096585_10452.jpg"
             alt="Post photo" />
         </div>
+        <!-- https://images.dog.ceo/breeds/dachshund/dachshund-3.jpg -->
         <div class="post__bot">
           <section class="post__buttons">
-            <div class="buttons--left">
-              <button class="btn--favorite">
+            <div class="post__buttons-left">
+              <button class="btn-tiny btn--favorite">
                 <svg>
                   <use href="src/img/icons.svg#icon-favorite"></use>
                 </svg>
               </button>
-              <button class="btn--comment">
+              <button class="btn-tiny btn--comment">
                 <svg>
                   <use href="src/img/icons.svg#icon-comment"></use>
                 </svg>
               </button>
-              <button class="btn--send">
+              <button class="btn-tiny btn--send">
                 <svg>
                   <use href="src/img/icons.svg#icon-send"></use>
                 </svg>
               </button>
             </div>
-            <div class="buttons--right">
-              <button class="btn--bookmark">
+            <div class="post__buttons-right">
+              <button class="btn-tiny btn--bookmark">
                 <svg>
                   <use href="src/img/icons.svg#icon-bookmark"></use>
                 </svg>
@@ -100,19 +108,20 @@
           <section class="post__description">
             <details>
               <summary>
-                <h2 class="post__description-username">Aislinn</h2>
+                <span class="post__description-username">Aislinn</span>
                 <span class="post__description-text">Her daily goal...</span>
                 <span class="post__description-btn">more</span>
               </summary>
               <div>
+                <span class="post__description-username">Aislinn</span>
                 <!-- prettier-ignore -->
                 <span class="post__description-text">Her daily goal was to improve on yesterday.</span>
                 <!-- <span class="post__description-btn"> hide</span> -->
               </div>
             </details>
           </section>
-          <section class="post-comments">
-            <b>View 6 comments</b>
+          <section class="post__comments">
+            <span>View 6 comments</span>
           </section>
         </div>
       </main>
