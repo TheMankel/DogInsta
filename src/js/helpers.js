@@ -7,3 +7,16 @@ const timeout = function (s) {
     }, s * 1000);
   });
 };
+
+export const getJSON = async function (url) {
+  try {
+    const fetchPromise = fetch(url);
+    const res = await Promise.race([fetchPromise, timeout(TIMEOUT_SEC)]);
+    const data = await res.json();
+
+    if (!res.ok) throw new Error(`${data.message} Status code: ${res.status}`);
+    return data;
+  } catch (err) {
+    throw err;
+  }
+};
