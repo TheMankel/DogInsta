@@ -6,8 +6,18 @@
   border-bottom: 2px solid #ededed;
 
   &__logo {
-    height: 48px;
+    display: flex;
+    align-items: center;
     margin-left: 8px;
+
+    &-img {
+      height: 48px;
+    }
+
+    &-name {
+      font-weight: 700;
+      font-size: 32px;
+    }
   }
 
   .nav {

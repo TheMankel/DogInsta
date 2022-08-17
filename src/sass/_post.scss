@@ -1,119 +1,121 @@
-.post__content {
-  display: flex;
-  flex-direction: column;
-  // justify-content: space-between;
-
-  .post__top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 8px;
-
-    &-user {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-
-      &--img {
-        height: 48px;
-        width: 48px;
-        border-radius: 50%;
-      }
-    }
-
-    &-btn {
-      display: flex;
-      align-items: center;
-      transition: all 0.25s;
-      cursor: pointer;
-
-      svg {
-        height: 32px;
-        width: 32px;
-      }
-
-      &:hover {
-        opacity: 50%;
-      }
-    }
-  }
-
-  .post__photo {
-    display: flex;
-    justify-content: center;
-    max-height: 300px;
-    background: #ffffff;
-    border-top: 2px solid #ededed;
-    // border-bottom: 2px solid #ededed;
-
-    img {
-      max-width: 100%;
-      height: auto;
-      max-height: 300px;
-      margin: -2px 0 0;
-    }
-  }
-
-  .post__bot {
+.posts {
+  .post {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding: 0 12px;
+    // justify-content: space-between;
 
-    .post__buttons {
+    .post__top {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 8px 0;
+      margin: 8px;
 
-      &-left,
-      &-right {
+      &-user {
         display: flex;
+        justify-content: space-between;
         align-items: center;
         gap: 12px;
 
-        .btn-tiny {
-          display: flex;
-          align-items: center;
-          transition: all 0.25s;
-          cursor: pointer;
+        &--img {
+          height: 48px;
+          width: 48px;
+          border-radius: 50%;
+        }
+      }
 
-          svg {
-            height: 32px;
-            width: 32px;
-          }
+      &-btn {
+        display: flex;
+        align-items: center;
+        transition: all 0.25s;
+        cursor: pointer;
 
-          &:hover {
-            opacity: 50%;
-          }
+        svg {
+          height: 32px;
+          width: 32px;
+        }
+
+        &:hover {
+          opacity: 50%;
         }
       }
     }
 
-    .post__description {
-      details > summary {
-        list-style: none;
-      }
+    .post__photo {
+      display: flex;
+      justify-content: center;
+      max-height: 300px;
+      background: #ffffff;
+      border-top: 2px solid #ededed;
+      border-bottom: 2px solid #ededed;
 
-      details[open] > summary {
-        display: none;
-      }
-
-      &-username {
-        font-weight: 600;
-      }
-
-      &-btn {
-        font-weight: 600;
-        cursor: pointer;
-        // color: rgba(0, 0, 0, 0.5);
-        filter: contrast(50%);
+      img {
+        max-width: 100%;
+        height: auto;
+        max-height: 300px;
+        margin: -2px 0;
       }
     }
 
-    .post__comments {
-      font-weight: 600;
+    .post__bot {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 0 12px;
+
+      .post__buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+
+        &-left,
+        &-right {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+
+          .btn-tiny {
+            display: flex;
+            align-items: center;
+            transition: all 0.25s;
+            cursor: pointer;
+
+            svg {
+              height: 32px;
+              width: 32px;
+            }
+
+            &:hover {
+              opacity: 50%;
+            }
+          }
+        }
+      }
+
+      .post__description {
+        details > summary {
+          list-style: none;
+        }
+
+        details[open] > summary {
+          display: none;
+        }
+
+        &-username {
+          font-weight: 600;
+        }
+
+        &-btn {
+          font-weight: 600;
+          cursor: pointer;
+          // color: rgba(0, 0, 0, 0.5);
+          filter: contrast(50%);
+        }
+      }
+
+      .post__comments {
+        font-weight: 600;
+      }
     }
   }
 }
