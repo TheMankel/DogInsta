@@ -1,0 +1,59 @@
+$color-primary: #f38e82;
+
+$color-grey-light-1: #f9f5f3; // Light background
+$color-grey-light-2: #f2efee; // Light lines
+$color-grey-light-3: #d3c7c3; // Light text (placeholder)
+$color-grey-dark-1: #615551; // Normal text
+$color-grey-dark-2: #918581; // Lighter text
+
+$background: #ffffff;
+
+$bp-large: 78.15em; // 1250px
+$bp-medium: 61.25em; // 980px
+$bp-small: 37.5em; // 600px
+$bp-smallest: 31.25em; // 500px
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+
+  svg {
+    fill: black;
+  }
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  // max-height: 900px;
+  max-width: 512px;
+  border-radius: 16px;
+  box-shadow: 0px 0px 16px rgba(150, 150, 150, 0.75);
+  overflow: hidden;
+  width: 100%;
+
+  .post__content {
+    overflow-y: scroll;
+    height: 100%;
+    padding-bottom: 196px;
+  }
+
+  @media screen and (max-width: 513px) {
+    box-shadow: none;
+    border-radius: 0;
+  }
+}

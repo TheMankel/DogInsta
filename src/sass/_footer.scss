@@ -1,0 +1,32 @@
+.footer {
+  margin: 8px;
+
+  .nav {
+    &__list {
+      list-style: none;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    &__item {
+      position: relative;
+    }
+
+    &__btn {
+      display: flex;
+      align-items: center;
+      transition: all 0.25s;
+      cursor: pointer;
+
+      svg {
+        height: 32px;
+        width: 32px;
+        margin-right: 12px;
+      }
+
+      &:hover {
+        opacity: 50%;
+      }
+    }
+  }
+}
