@@ -11,16 +11,10 @@ class PostView extends View {
     this._parentElement.addEventListener('scroll', function () {
       const posts = [...document.querySelectorAll('.post')];
 
-      // BUG
-      posts.map((post, id) => {
-        // console.log(post, id);
-        // console.log('clientHeight', this.clientHeight);
-        // console.log('scrollTop', this.scrollTop);
-        // console.log('scrollHeight', this.scrollHeight);
-        if (this.scrollTop + this.clientHeight >= this.scrollHeight - 50)
-          handler();
-      });
-      console.log(posts.length);
+      if (this.scrollTop + this.clientHeight >= this.scrollHeight - 5)
+        handler();
+
+      // console.log(posts.length);
     });
   }
 
