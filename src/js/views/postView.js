@@ -7,23 +7,44 @@ class PostView extends View {
   _message = '';
 
   addHandlerRender(handler) {
-    window.addEventListener('load', handler);
-    this._parentElement.addEventListener('scroll', function () {
-      const posts = [...document.querySelectorAll('.post')];
-
-      if (this.scrollTop + this.clientHeight >= this.scrollHeight - 5)
-        handler();
-
-      // console.log(posts.length);
+    window.addEventListener('load', function () {
+      handler();
+      // handler();
     });
+
+    // OLD WAY OF RENDERING NEW POSTS
+    // this._parentElement.addEventListener('scroll', function () {
+    //   const posts = [...document.querySelectorAll('.post')];
+
+    //   if (this.scrollTop + this.clientHeight >= this.scrollHeight - 1) {
+    //     handler();
+    //   }
+    // });
   }
 
-  addHandlerRenderScroll(handler) {
+  addObserver(handler) {
+    // console.count();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].intersectionRatio === 1) {
+          handler();
+          observer.unobserve(entries[0].target);
+        }
+      },
+      {
+        // [0.25, 0.5, 0.75, 1]
+        threshold: [0.5, 1],
+      },
+    );
     const posts = [...document.querySelectorAll('.post')];
-    posts.map((post, id) => {
-      console.log(post, id);
-    });
-    // .addEventListener('click', function () {});
+
+    // posts.forEach((post, id, posts) => {
+    //   observer.unobserve(post);
+    //   if (id === posts.length - 1) {
+    //     observer.observe(post);
+    //   }
+    // });
+    observer.observe(posts.at(-1));
   }
 
   _generateMarkup() {
