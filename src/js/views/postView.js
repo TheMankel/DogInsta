@@ -28,6 +28,7 @@ class PostView extends View {
     const callback = (entries) => {
       if (entries[0].intersectionRatio === 1) {
         handler();
+        entries[0].target.classList.remove('show');
         observer.unobserve(entries[0].target);
       }
     };
@@ -35,7 +36,9 @@ class PostView extends View {
     const options = {
       root: null,
       rootMargin: '0px',
-      threshold: [0.5, 1],
+      threshold: [0.25, 0.5, 0.75, 1],
+      // [0.25, 0.5, 0.75, 1]
+      // [0.5, 1]
     };
 
     const observer = new IntersectionObserver(callback, options);
@@ -52,16 +55,26 @@ class PostView extends View {
     observer.observe(posts.at(-1));
   }
 
+  _generatePartQuote() {
+    return this._data.quote.split(' ').slice(0, 3).join(' ');
+  }
+
+  _getRandomInt() {
+    const min = 2;
+    const max = 10000;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
   _generateMarkup() {
     return `
-      <div class="post">
+      <div class="post show">
         <div class="post__top">
           <div class="post__top-user">
             <img
-              src="https://pyrek.pl/wp-content/uploads/2021/04/papaj.jpg"
+              src="${this._data.profilePictures.thumbnail}"
               alt="Account icon"
               class="post__top-user--img" />
-            <span class="post__top-user--name">Jan Pawlacz</span>
+            <span class="post__top-user--name">${this._data.username}</span>
           </div>
           <button class="post__top-btn post__top--more">
             <svg class="post__top-icon">
@@ -71,7 +84,7 @@ class PostView extends View {
         </div>
         <div class="post__photo">
           <img
-            src="${this._data}"
+            src="${this._data.postImage}"
             alt="Post photo" />
         </div>
         <div class="post__bot">
@@ -103,20 +116,24 @@ class PostView extends View {
           </section>
           <section class="post__likes">
             <div class="post__likes-count">
-              <span class="post__likes-data">2137</span>
+              <span class="post__likes-data">${this._getRandomInt()}</span>
               <span class="post__likes-text">likes</span>
             </div>
           </section>
           <section class="post__description">
             <details>
               <summary>
-                <span class="post__description-username">Aislinn</span>
-                <span class="post__description-text">Her daily goal...</span>
+                <span class="post__description-username">${
+                  this._data.username
+                }</span>
+                <span class="post__description-text">${this._generatePartQuote()}...</span>
                 <span class="post__description-btn">more</span>
               </summary>
               <div>
-                <span class="post__description-username">Aislinn</span>
-                <span class="post__description-text">Her daily goal was to improve on yesterday.</span>
+                <span class="post__description-username">${
+                  this._data.username
+                }</span>
+                <span class="post__description-text">${this._data.quote}</span>
               </div>
             </details>
           </section>

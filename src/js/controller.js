@@ -2,6 +2,7 @@ import * as model from './model';
 import postView from './views/postView';
 
 const controlPosts = async function () {
+  postView.renderSpinner();
   // Load new Post
   await model.loadPost();
   // Render new post
