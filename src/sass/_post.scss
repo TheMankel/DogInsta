@@ -9,6 +9,7 @@
     // justify-content: space-between;
     border-bottom: 2px solid #ededed;
     padding-bottom: 8px;
+    animation: fadeIn 0.5s ease-out;
 
     .post__top {
       display: flex;
@@ -124,10 +125,6 @@
       .post__comments {
         font-weight: 600;
       }
-    }
-
-    &.show {
-      animation: fadeIn 0.5s ease-out;
     }
 
     @keyframes fadeIn {

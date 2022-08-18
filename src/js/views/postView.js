@@ -28,7 +28,7 @@ class PostView extends View {
     const callback = (entries) => {
       if (entries[0].intersectionRatio === 1) {
         handler();
-        entries[0].target.classList.remove('show');
+        // entries[0].target.classList.remove('show');
         observer.unobserve(entries[0].target);
       }
     };
