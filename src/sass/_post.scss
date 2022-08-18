@@ -3,6 +3,8 @@
     display: flex;
     flex-direction: column;
     // justify-content: space-between;
+    border-bottom: 2px solid #ededed;
+    padding-bottom: 8px;
 
     .post__top {
       display: flex;
@@ -100,7 +102,9 @@
         details[open] > summary {
           display: none;
         }
-
+        span {
+          text-align: justify;
+        }
         &-username {
           font-weight: 600;
         }
