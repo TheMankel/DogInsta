@@ -24,18 +24,22 @@ class PostView extends View {
 
   addObserver(handler) {
     // console.count();
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].intersectionRatio === 1) {
-          handler();
-          observer.unobserve(entries[0].target);
-        }
-      },
-      {
-        // [0.25, 0.5, 0.75, 1]
-        threshold: [0.5, 1],
-      },
-    );
+
+    const callback = (entries) => {
+      if (entries[0].intersectionRatio === 1) {
+        handler();
+        observer.unobserve(entries[0].target);
+      }
+    };
+
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: [0.5, 1],
+    };
+
+    const observer = new IntersectionObserver(callback, options);
+
     const posts = [...document.querySelectorAll('.post')];
 
     // posts.forEach((post, id, posts) => {
@@ -44,6 +48,7 @@ class PostView extends View {
     //     observer.observe(post);
     //   }
     // });
+
     observer.observe(posts.at(-1));
   }
 
