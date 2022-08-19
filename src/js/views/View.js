@@ -34,4 +34,8 @@ export default class View {
   renderError(message = this._errorMessage) {
     console.error(message);
   }
+
+  renderMessage(message = this._message) {
+    console.log(message);
+  }
 }

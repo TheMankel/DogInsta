@@ -6,6 +6,13 @@ class PostView extends View {
   _errorMessage = 'We could not load this post :(';
   _message = '';
 
+  constructor() {
+    super();
+
+    this.#addHandlerLike();
+    this.#addHandlerSend();
+  }
+
   addHandlerRender(handler) {
     window.addEventListener('load', function () {
       handler();
@@ -22,13 +29,65 @@ class PostView extends View {
     // });
   }
 
+  #addHandlerLike() {
+    this._parentElement.addEventListener('click', function (e) {
+      const btn = e.target.closest('.btn--favorite');
+      if (!btn) return;
+
+      const likesNum = e.target
+        .closest('.post__bot')
+        .querySelector('.post__likes-data');
+
+      if (btn.dataset.filled === 'true') {
+        btn.querySelector('use').setAttribute('href', `${icons}#icon-favorite`);
+        likesNum.textContent = +likesNum.textContent - 1;
+        btn.dataset.filled = 'false';
+      } else {
+        btn
+          .querySelector('use')
+          .setAttribute('href', `${icons}#icon-favorite-fill`);
+        likesNum.textContent = +likesNum.textContent + 1;
+        btn.dataset.filled = 'true';
+      }
+    });
+  }
+
+  #addHandlerSend() {
+    this._parentElement.addEventListener('click', function (e) {
+      const btn = e.target.closest('.btn--send');
+      if (!btn) return;
+
+      const postPhotoSrc = e.target
+        .closest('.post')
+        .querySelector('.post__photo img').src;
+
+      navigator.clipboard.writeText(postPhotoSrc);
+
+      if (!postPhotoSrc) return;
+
+      document.querySelector('.modal__copy')?.remove();
+
+      console.log(`Copied photo URL: ${postPhotoSrc}`);
+
+      const markup = `
+        <div class="modal__copy">
+          <div class="modal__copy-wrapper">
+            <span>Copied photo URL</span>
+          </div>
+        </div>
+      `;
+
+      document.querySelector('body').insertAdjacentHTML('afterbegin', markup);
+      // this.insertAdjacentHTML('afterbegin', markup);
+    });
+  }
+
   addObserver(handler) {
     // console.count();
 
     const callback = (entries) => {
       if (entries[0].intersectionRatio === 1) {
         handler();
-        // entries[0].target.classList.remove('show');
         observer.unobserve(entries[0].target);
       }
     };
@@ -67,7 +126,7 @@ class PostView extends View {
 
   _generateMarkup() {
     return `
-      <div class="post show">
+      <div class="post">
         <div class="post__top">
           <div class="post__top-user">
             <img
@@ -90,7 +149,7 @@ class PostView extends View {
         <div class="post__bot">
           <section class="post__buttons">
             <div class="post__buttons-left">
-              <button class="btn-tiny btn--favorite">
+              <button class="btn-tiny btn--favorite" data-filled="false">
                 <svg>
                   <use href="${icons}#icon-favorite"></use>
                 </svg>
@@ -143,6 +202,9 @@ class PostView extends View {
         </div>
       </div>
     `;
+  }
+  siur() {
+    console.log('siur');
   }
 }
 
