@@ -7,6 +7,15 @@
 
   svg {
     fill: black;
+    height: 24px;
+    width: 24px;
+  }
+
+  @media screen and (min-width: 512px) {
+    svg {
+      height: 32px;
+      width: 32px;
+    }
   }
 }
 
@@ -36,5 +45,16 @@ body {
   @media screen and (max-width: 513px) {
     box-shadow: none;
     border-radius: 0;
+
+    .header__logo {
+      &-img {
+        height: 32px;
+      }
+
+      &-name {
+        font-weight: 700;
+        font-size: 24px;
+      }
+    }
   }
 }

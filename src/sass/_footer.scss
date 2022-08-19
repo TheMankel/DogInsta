@@ -18,12 +18,6 @@
       transition: all 0.25s;
       cursor: pointer;
 
-      svg {
-        height: 32px;
-        width: 32px;
-        margin-right: 12px;
-      }
-
       &:hover {
         opacity: 50%;
       }

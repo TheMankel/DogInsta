@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 8px 0 0;
+  padding: 4px 0;
   border-bottom: 2px solid #ededed;
 
   &__logo {
@@ -44,11 +44,6 @@
       align-items: center;
       transition: all 0.25s;
       cursor: pointer;
-
-      svg {
-        height: 32px;
-        width: 32px;
-      }
 
       &:hover {
         opacity: 50%;
