@@ -1,6 +1,7 @@
 import View from './View';
 import icons from '../../img/icons.svg';
 
+// export class PostView extends View {
 class PostView extends View {
   _parentElement = document.querySelector('.posts');
   _errorMessage = 'We could not load this post :(';
@@ -10,6 +11,7 @@ class PostView extends View {
     super();
 
     this.#addHandlerLike();
+    this.#addHandlerComments();
     this.#addHandlerSend();
     this.#addHandlerBookmark();
   }
@@ -82,6 +84,21 @@ class PostView extends View {
         likesNum.textContent = +likesNum.textContent + 1;
         btn.dataset.filled = 'true';
       }
+    });
+  }
+
+  #addHandlerComments() {
+    const helper = this;
+    this._parentElement.addEventListener('click', function (e) {
+      const btn = e.target.closest('.btn--comment');
+      if (!btn) return;
+      console.log(helper);
+      const min = 2;
+      const max = 10000;
+
+      this.num = Math.floor(Math.random() * (max - min + 1)) + min;
+      console.log(this.num);
+      console.log(btn);
     });
   }
 

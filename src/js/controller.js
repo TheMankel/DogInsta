@@ -1,18 +1,46 @@
 import * as model from './model';
-import postView from './views/postView';
+import PostView from './views/PostView';
 
 const controlPosts = async function () {
-  postView.renderSpinner();
+  PostView.renderSpinner();
   // Load new Post
   await model.loadPost();
   // Render new post
-  postView.render(model.state.post);
+  PostView.render(model.state.post);
 
   // Add observer to last post and eventually generate new one
-  postView.addHandlerObserver(controlPosts);
+  PostView.addHandlerObserver(controlPosts);
 };
 
 const init = function () {
-  postView.addHandlerRender(controlPosts);
+  PostView.addHandlerRender(controlPosts);
 };
 init();
+
+// class App {
+//   constructor() {
+//     this.init();
+//     this.controlPosts();
+//     this.controlPosts();
+//   }
+
+//   init() {
+//     // const post = new PostView();
+//     // post.addHandlerRender(this.controlPosts);
+//   }
+
+//   async controlPosts() {
+//     const post = new PostView();
+
+//     post.renderSpinner();
+//     // Load new Post
+//     await model.loadPost();
+//     // Render new post
+//     post.render(model.state.post);
+
+//     // Add observer to last post and eventually generate new one
+//     post.addHandlerObserver(controlPosts);
+//   }
+// }
+
+// new App();
