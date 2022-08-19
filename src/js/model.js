@@ -1,4 +1,10 @@
-import { DOG_API_URL, QUOTE_API_URL, USER_API_URL } from './config';
+import {
+  DOG_API_URL,
+  NAT_ARR,
+  QUOTE_API_URL,
+  USER_API_URL,
+  USER_DATA,
+} from './config';
 import { getJSON } from './helpers';
 
 export const state = {
@@ -9,7 +15,8 @@ export const state = {
 
 const createPostData = function (userObject) {
   state.post = {
-    username: userObject.login.username,
+    // username: userObject.login.username,
+    username: userObject.name.first,
     profilePictures: userObject.picture,
     postImage: userObject.postImage,
     quote: userObject.quote,
@@ -19,7 +26,9 @@ const createPostData = function (userObject) {
 export const loadPost = async function () {
   try {
     const imageData = await getJSON(DOG_API_URL);
-    const userData = await getJSON(USER_API_URL);
+    const userData = await getJSON(
+      `${USER_API_URL}?inc=${USER_DATA}&nat=${NAT_ARR}&noinfo`,
+    );
     const quoteData = await getJSON(QUOTE_API_URL);
 
     const { results } = userData;
