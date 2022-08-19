@@ -1,14 +1,17 @@
 import View from './View';
 import icons from '../../img/icons.svg';
 
-// export class PostView extends View {
-class PostView extends View {
+export class PostView extends View {
   _parentElement = document.querySelector('.posts');
   _errorMessage = 'We could not load this post :(';
   _message = '';
 
-  constructor() {
+  constructor(data) {
     super();
+
+    this.render(data);
+
+    console.log(this);
 
     this.#addHandlerLike();
     this.#addHandlerComments();
@@ -23,13 +26,13 @@ class PostView extends View {
     });
 
     // OLD WAY OF RENDERING NEW POSTS
-    // this._parentElement.addEventListener('scroll', function () {
-    //   const posts = [...document.querySelectorAll('.post')];
+    this._parentElement.addEventListener('scroll', function () {
+      const posts = [...document.querySelectorAll('.post')];
 
-    //   if (this.scrollTop + this.clientHeight >= this.scrollHeight - 1) {
-    //     handler();
-    //   }
-    // });
+      if (this.scrollTop + this.clientHeight >= this.scrollHeight - 1) {
+        handler();
+      }
+    });
   }
 
   addHandlerObserver(handler) {
@@ -89,6 +92,7 @@ class PostView extends View {
 
   #addHandlerComments() {
     const helper = this;
+
     this._parentElement.addEventListener('click', function (e) {
       const btn = e.target.closest('.btn--comment');
       if (!btn) return;
@@ -97,8 +101,8 @@ class PostView extends View {
       const max = 10000;
 
       this.num = Math.floor(Math.random() * (max - min + 1)) + min;
-      console.log(this.num);
-      console.log(btn);
+      // console.log(this.num);
+      // console.log(btn);
     });
   }
 
@@ -244,5 +248,3 @@ class PostView extends View {
     console.log('siur');
   }
 }
-
-export default new PostView();
