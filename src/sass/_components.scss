@@ -35,3 +35,33 @@
     }
   }
 }
+
+.modal__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  position: relative;
+  top: 100px;
+  width: 100%;
+  animation: fadeOut 2s forwards;
+
+  &-wrapper {
+    position: absolute;
+    padding: 12px;
+    text-align: center;
+    z-index: 10;
+    box-shadow: rgba(150, 150, 150, 0.75) 0px 2px 8px 0px;
+    border: 2px solid rgba(0, 0, 0, 0.75);
+    background: white;
+  }
+
+  @keyframes fadeOut {
+    100% {
+      opacity: 0;
+    }
+    0% {
+      opacity: 1;
+    }
+  }
+}
