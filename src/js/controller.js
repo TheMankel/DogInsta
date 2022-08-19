@@ -1,46 +1,53 @@
 import * as model from './model';
-import PostView from './views/PostView';
+import { HeaderView } from './views/HeaderView';
+import { FooterView } from './views/FooterView';
+import { PostView } from './views/PostView';
+import { LoaderView } from './views/LoaderView';
 
-const controlPosts = async function () {
-  PostView.renderSpinner();
-  // Load new Post
-  await model.loadPost();
-  // Render new post
-  PostView.render(model.state.post);
+// const controlPosts = async function () {
+//   PostView.renderSpinner();
+//   // Load new Post
+//   await model.loadPost();
+//   // Render new post
+//   PostView.render(model.state.post);
 
-  // Add observer to last post and eventually generate new one
-  PostView.addHandlerObserver(controlPosts);
-};
+//   // Add observer to last post and eventually generate new one
+//   PostView.addHandlerObserver(controlPosts);
+// };
 
-const init = function () {
-  PostView.addHandlerRender(controlPosts);
-};
-init();
+// const init = function () {
+//   PostView.addHandlerRender(controlPosts);
+// };
+// init();
 
-// class App {
-//   constructor() {
-//     this.init();
-//     this.controlPosts();
-//     this.controlPosts();
-//   }
+class Controller {
+  constructor() {
+    this.init();
+    this.createInitialPosts();
+    // this.controlPosts();
+  }
 
-//   init() {
-//     // const post = new PostView();
-//     // post.addHandlerRender(this.controlPosts);
-//   }
+  init() {
+    // const post = new PostView();
+    // post.addHandlerRender(this.controlPosts);
+    new HeaderView();
+    new FooterView();
+  }
 
-//   async controlPosts() {
-//     const post = new PostView();
+  async createInitialPosts() {
+    const loader = new LoaderView();
+    // Load new Post
+    await model.loadPost();
+    // Render new post
+    // post.render(model.state.post);
 
-//     post.renderSpinner();
-//     // Load new Post
-//     await model.loadPost();
-//     // Render new post
-//     post.render(model.state.post);
+    const post = new PostView(model.state.post);
 
-//     // Add observer to last post and eventually generate new one
-//     post.addHandlerObserver(controlPosts);
-//   }
-// }
+    loader.destroy();
 
-// new App();
+    // Add observer to last post and eventually generate new one
+    // post.addHandlerObserver(this.controlPosts);
+  }
+}
+
+new Controller();
