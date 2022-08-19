@@ -10,13 +10,13 @@ export default class View {
 
     const markup = this._generateMarkup();
 
-    const loadingEl = document.querySelector('.loading__spinner');
+    // const loadingEl = document.querySelector('.loading__spinner');
 
     this._parentElement.insertAdjacentHTML('beforeend', markup);
 
     // const lastPost = [...document.querySelectorAll('.post')].at(-1);
     // console.log(lastPost);
-    loadingEl.remove();
+    // loadingEl.remove();
   }
 
   renderSpinner() {
