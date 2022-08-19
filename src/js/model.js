@@ -45,3 +45,7 @@ export const loadPost = async function () {
     throw err;
   }
 };
+
+// export const addBookmark = function (bookmark) {
+//   state.bookmarks.push(bookmark);
+// };

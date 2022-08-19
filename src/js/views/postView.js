@@ -11,6 +11,7 @@ class PostView extends View {
 
     this.#addHandlerLike();
     this.#addHandlerSend();
+    this.#addHandlerBookmark();
   }
 
   addHandlerRender(handler) {
@@ -27,6 +28,38 @@ class PostView extends View {
     //     handler();
     //   }
     // });
+  }
+
+  addHandlerObserver(handler) {
+    // console.count();
+
+    const callback = (entries) => {
+      if (entries[0].intersectionRatio === 1) {
+        handler();
+        observer.unobserve(entries[0].target);
+      }
+    };
+
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: [0.25, 0.5, 0.75, 1],
+      // [0.25, 0.5, 0.75, 1]
+      // [0.5, 1]
+    };
+
+    const observer = new IntersectionObserver(callback, options);
+
+    const posts = [...document.querySelectorAll('.post')];
+
+    // posts.forEach((post, id, posts) => {
+    //   observer.unobserve(post);
+    //   if (id === posts.length - 1) {
+    //     observer.observe(post);
+    //   }
+    // });
+
+    observer.observe(posts.at(-1));
   }
 
   #addHandlerLike() {
@@ -67,7 +100,7 @@ class PostView extends View {
 
       document.querySelector('.modal__copy')?.remove();
 
-      console.log(`Copied photo URL: ${postPhotoSrc}`);
+      // console.log(`Copied photo URL: ${postPhotoSrc}`);
 
       const markup = `
         <div class="modal__copy">
@@ -82,39 +115,26 @@ class PostView extends View {
     });
   }
 
-  addObserver(handler) {
-    // console.count();
+  #addHandlerBookmark() {
+    this._parentElement.addEventListener('click', function (e) {
+      const btn = e.target.closest('.btn--bookmark');
+      if (!btn) return;
 
-    const callback = (entries) => {
-      if (entries[0].intersectionRatio === 1) {
-        handler();
-        observer.unobserve(entries[0].target);
+      if (btn.dataset.filled === 'true') {
+        btn.querySelector('use').setAttribute('href', `${icons}#icon-bookmark`);
+        btn.dataset.filled = 'false';
+      } else {
+        btn
+          .querySelector('use')
+          .setAttribute('href', `${icons}#icon-bookmark-fill`);
+        btn.dataset.filled = 'true';
       }
-    };
-
-    const options = {
-      root: null,
-      rootMargin: '0px',
-      threshold: [0.25, 0.5, 0.75, 1],
-      // [0.25, 0.5, 0.75, 1]
-      // [0.5, 1]
-    };
-
-    const observer = new IntersectionObserver(callback, options);
-
-    const posts = [...document.querySelectorAll('.post')];
-
-    // posts.forEach((post, id, posts) => {
-    //   observer.unobserve(post);
-    //   if (id === posts.length - 1) {
-    //     observer.observe(post);
-    //   }
-    // });
-
-    observer.observe(posts.at(-1));
+    });
   }
 
   _generatePartQuote() {
+    if (!this._data) return this.renderError();
+
     return this._data.quote.split(' ').slice(0, 3).join(' ');
   }
 
@@ -166,7 +186,7 @@ class PostView extends View {
               </button>
             </div>
             <div class="post__buttons-right">
-              <button class="btn-tiny btn--bookmark">
+              <button class="btn-tiny btn--bookmark" data-filled="false">
                 <svg>
                   <use href="${icons}#icon-bookmark"></use>
                 </svg>

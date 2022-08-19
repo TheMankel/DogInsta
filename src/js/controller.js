@@ -9,7 +9,7 @@ const controlPosts = async function () {
   postView.render(model.state.post);
 
   // Add observer to last post and eventually generate new one
-  postView.addObserver(controlPosts);
+  postView.addHandlerObserver(controlPosts);
 };
 
 const init = function () {
