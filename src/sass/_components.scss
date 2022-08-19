@@ -6,6 +6,13 @@
 
   &-icon {
     animation: rotate 2s linear infinite;
+    height: 50px;
+    width: 50px;
+
+    @media screen and (min-width: 512px) {
+      height: 100px;
+      width: 100px;
+    }
 
     .path {
       stroke: rgba(0, 0, 0, 0.75);
