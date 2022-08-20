@@ -39,7 +39,7 @@ body {
   overflow: hidden;
   width: 100%;
   height: 100%;
-
+  position: relative;
   box-shadow: none;
   border-radius: 0;
 
@@ -56,5 +56,16 @@ body {
         font-size: 32px;
       }
     }
+  }
+}
+
+.btn-tiny {
+  display: flex;
+  align-items: center;
+  transition: all 0.25s;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 50%;
   }
 }

@@ -36,17 +36,6 @@
           }
         }
       }
-
-      &-btn {
-        display: flex;
-        align-items: center;
-        transition: all 0.25s;
-        cursor: pointer;
-
-        &:hover {
-          opacity: 50%;
-        }
-      }
     }
 
     .post__photo {
@@ -82,17 +71,6 @@
           display: flex;
           align-items: center;
           gap: 12px;
-
-          .btn-tiny {
-            display: flex;
-            align-items: center;
-            transition: all 0.25s;
-            cursor: pointer;
-
-            &:hover {
-              opacity: 50%;
-            }
-          }
         }
       }
 
