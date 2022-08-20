@@ -1,5 +1,11 @@
-export class FooterView {
+import View from './View';
+
+export class FooterView extends View {
+  _message = 'This function is unsupported. Have some balloons 🎈🎈';
+
   constructor() {
+    super();
+
     this.#init();
     this.footer.addEventListener('click', this.#clickBtnHandler.bind(this));
   }
@@ -13,8 +19,9 @@ export class FooterView {
     const btn = e.target.closest('button');
     if (!btn) return;
 
-    console.log(btn);
-    this.feedScrollTop();
+    // console.log(btn);
+    if (btn.classList.contains('nav__btn--home-page')) this.feedScrollTop();
+    else this.renderMessage();
   }
 
   feedScrollTop() {

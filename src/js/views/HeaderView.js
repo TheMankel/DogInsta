@@ -1,5 +1,11 @@
-export class HeaderView {
+import View from './View';
+
+export class HeaderView extends View {
+  _message = 'This function is unsupported. Have some balloons 🎈🎈';
+
   constructor() {
+    super();
+
     this.#init();
     this.header.addEventListener('click', this.#clickBtnHandler.bind(this));
   }
@@ -13,6 +19,7 @@ export class HeaderView {
     const btn = e.target.closest('button');
     if (!btn) return;
 
-    console.log(btn);
+    // console.log(btn);
+    this.renderMessage();
   }
 }
