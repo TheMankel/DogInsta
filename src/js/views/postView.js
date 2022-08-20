@@ -75,7 +75,25 @@ export class PostView extends View {
   }
 
   #commentButtonHandler() {
-    this.renderMessage();
+    console.log(this._data.comments);
+
+    const markup = `
+    <div class="modal__unsupported">
+      <div class="modal__unsupported-wrapper">
+        <button>X</button>
+      </div>
+    </div>
+  `;
+
+    document
+      .querySelector('.container')
+      .insertAdjacentHTML('afterbegin', markup);
+
+    document
+      .querySelector('.modal__unsupported button')
+      .addEventListener('click', function () {
+        document.querySelector('.modal__unsupported').remove();
+      });
   }
 
   #sendButtonHandler() {
@@ -128,12 +146,12 @@ export class PostView extends View {
     return this._data.description.split(' ').slice(0, 3).join(' ');
   }
 
-  _generateRandomInt() {
-    const min = 2;
-    const max = 10000;
+  // _generateRandomInt() {
+  //   const min = 2;
+  //   const max = 10000;
 
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+  //   return Math.floor(Math.random() * (max - min + 1)) + min;
+  // }
 
   _generateMarkup() {
     return `
@@ -186,7 +204,7 @@ export class PostView extends View {
           </section>
           <section class="post__likes">
             <div class="post__likes-count">
-              <span class="post__likes-data">${this._generateRandomInt()}</span>
+              <span class="post__likes-data">${this._data.likesCount}</span>
               <span class="post__likes-text">likes</span>
             </div>
           </section>
@@ -210,7 +228,7 @@ export class PostView extends View {
             </details>
           </section>
           <section class="post__comments">
-            <span>View 6 comments</span>
+            <span>View ${this._data.comments.length} comments</span>
           </section>
         </div>
       </div>
