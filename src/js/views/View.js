@@ -11,31 +11,34 @@ export default class View {
 
     const markup = this._generateMarkup();
 
-    // const loadingEl = document.querySelector('.loading__spinner');
-
     this._parentElement.insertAdjacentHTML('beforeend', markup);
     this._thisElement = this._parentElement.lastElementChild;
-
-    // loadingEl.remove();
   }
-
-  // renderSpinner() {
-  //   const markup = `
-  //     <div class='loading__spinner'>
-  //       <svg class="loading__spinner-icon">
-  //         <use class="path" href="${icons}#icon-spinner"></use>
-  //       </svg>
-  //     </div>
-  //   `;
-
-  //   this._parentElement.insertAdjacentHTML('beforeend', markup);
-  // }
 
   renderError(message = this._errorMessage) {
     console.error(message);
   }
 
   renderMessage(message = this._message) {
-    console.log(message);
+    // console.log(message);
+
+    const markup = `
+    <div class="modal__unsupported">
+      <div class="modal__unsupported-wrapper">
+        <span>${message}</span>
+        <button>Ok</button>
+      </div>
+    </div>
+  `;
+
+    document
+      .querySelector('.container')
+      .insertAdjacentHTML('afterbegin', markup);
+
+    document
+      .querySelector('.modal__unsupported button')
+      .addEventListener('click', function () {
+        document.querySelector('.modal__unsupported').remove();
+      });
   }
 }
