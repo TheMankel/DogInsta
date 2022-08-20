@@ -19,7 +19,7 @@ const createPostData = function (userObject) {
     username: userObject.name.first,
     profilePictures: userObject.picture,
     postImage: userObject.postImage,
-    quote: userObject.quote,
+    description: userObject.description,
   };
 };
 
@@ -36,7 +36,7 @@ export const loadPost = async function () {
     const { quote } = quoteData;
 
     userObject.postImage = imageData.message;
-    userObject.quote = quote.body;
+    userObject.description = quote.body;
 
     createPostData(userObject);
     // console.log(state.post);
