@@ -11,28 +11,35 @@ export class PostView extends View {
 
     this.render(data);
 
-    console.log(this);
+    // this.#addHandlerLike();
+    // this.#addHandlerComments();
+    // this.#addHandlerSend();
+    // this.#addHandlerBookmark();
+    this._likeBtn = this._thisElement.querySelector('.btn--favorite');
+    this._commentBtn = this._thisElement.querySelector('.btn--comment');
+    this._sendBtn = this._thisElement.querySelector('.btn--send');
+    this._bookmarkBtn = this._thisElement.querySelector('.btn--bookmark');
 
-    this.#addHandlerLike();
-    this.#addHandlerComments();
-    this.#addHandlerSend();
-    this.#addHandlerBookmark();
+    this.#initButtons();
   }
 
-  addHandlerRender(handler) {
-    window.addEventListener('load', function () {
-      handler();
-      // handler();
-    });
+  // addHandlerRender(handler) {
+  //   // OLD WAY OF RENDERING NEW POSTS
+  //   this._parentElement.addEventListener('scroll', function () {
+  //     const posts = [...document.querySelectorAll('.post')];
+  //     if (this.scrollTop + this.clientHeight >= this.scrollHeight - 1) {
+  //       handler();
+  //     }
+  //   });
+  // }
 
-    // OLD WAY OF RENDERING NEW POSTS
-    this._parentElement.addEventListener('scroll', function () {
-      const posts = [...document.querySelectorAll('.post')];
-
-      if (this.scrollTop + this.clientHeight >= this.scrollHeight - 1) {
-        handler();
-      }
-    });
+  #initButtons() {
+    this._likeBtn.addEventListener('click', this.#likeButtonHandler.bind(this));
+    this._sendBtn.addEventListener('click', this.#sendButtonHandler.bind(this));
+    this._bookmarkBtn.addEventListener(
+      'click',
+      this.#bookmarkButtonHandler.bind(this),
+    );
   }
 
   addHandlerObserver(handler) {
@@ -49,13 +56,11 @@ export class PostView extends View {
       root: null,
       rootMargin: '0px',
       threshold: [0.25, 0.5, 0.75, 1],
-      // [0.25, 0.5, 0.75, 1]
-      // [0.5, 1]
     };
 
     const observer = new IntersectionObserver(callback, options);
 
-    const posts = [...document.querySelectorAll('.post')];
+    // const posts = [...document.querySelectorAll('.post')];
 
     // posts.forEach((post, id, posts) => {
     //   observer.unobserve(post);
@@ -64,102 +69,75 @@ export class PostView extends View {
     //   }
     // });
 
-    observer.observe(posts.at(-1));
+    // observer.observe(posts.at(-1));
+    observer.observe(this._thisElement);
   }
 
-  #addHandlerLike() {
-    this._parentElement.addEventListener('click', function (e) {
-      const btn = e.target.closest('.btn--favorite');
-      if (!btn) return;
+  #likeButtonHandler() {
+    const likesNum = this._thisElement.querySelector('.post__likes-data');
 
-      const likesNum = e.target
-        .closest('.post__bot')
-        .querySelector('.post__likes-data');
+    if (this._likeBtn.getAttribute('data-filled') === 'true') {
+      likesNum.textContent = +likesNum.textContent - 1;
+    } else {
+      likesNum.textContent = +likesNum.textContent + 1;
+    }
 
-      if (btn.dataset.filled === 'true') {
-        btn.querySelector('use').setAttribute('href', `${icons}#icon-favorite`);
-        likesNum.textContent = +likesNum.textContent - 1;
-        btn.dataset.filled = 'false';
-      } else {
-        btn
-          .querySelector('use')
-          .setAttribute('href', `${icons}#icon-favorite-fill`);
-        likesNum.textContent = +likesNum.textContent + 1;
-        btn.dataset.filled = 'true';
-      }
-    });
+    this.toggleButtonFill(this._likeBtn, 'favorite');
   }
 
-  #addHandlerComments() {
-    const helper = this;
+  #commentButtonHandler() {}
 
-    this._parentElement.addEventListener('click', function (e) {
-      const btn = e.target.closest('.btn--comment');
-      if (!btn) return;
-      console.log(helper);
-      const min = 2;
-      const max = 10000;
+  #sendButtonHandler() {
+    const postPhotoSrc =
+      this._thisElement.querySelector('.post__photo img').src;
 
-      this.num = Math.floor(Math.random() * (max - min + 1)) + min;
-      // console.log(this.num);
-      // console.log(btn);
-    });
+    navigator.clipboard.writeText(postPhotoSrc);
+
+    if (!postPhotoSrc) return;
+
+    document.querySelector('.modal__copy')?.remove();
+
+    // console.log(`Copied photo URL: ${postPhotoSrc}`);
+
+    const markup = `
+    <div class="modal__copy">
+      <div class="modal__copy-wrapper">
+        <span>Copied photo URL</span>
+      </div>
+    </div>
+  `;
+
+    document.querySelector('body').insertAdjacentHTML('afterbegin', markup);
+    // this.insertAdjacentHTML('afterbegin', markup);
   }
 
-  #addHandlerSend() {
-    this._parentElement.addEventListener('click', function (e) {
-      const btn = e.target.closest('.btn--send');
-      if (!btn) return;
-
-      const postPhotoSrc = e.target
-        .closest('.post')
-        .querySelector('.post__photo img').src;
-
-      navigator.clipboard.writeText(postPhotoSrc);
-
-      if (!postPhotoSrc) return;
-
-      document.querySelector('.modal__copy')?.remove();
-
-      // console.log(`Copied photo URL: ${postPhotoSrc}`);
-
-      const markup = `
-        <div class="modal__copy">
-          <div class="modal__copy-wrapper">
-            <span>Copied photo URL</span>
-          </div>
-        </div>
-      `;
-
-      document.querySelector('body').insertAdjacentHTML('afterbegin', markup);
-      // this.insertAdjacentHTML('afterbegin', markup);
-    });
+  #bookmarkButtonHandler() {
+    this.toggleButtonFill(this._bookmarkBtn, 'bookmark');
   }
 
-  #addHandlerBookmark() {
-    this._parentElement.addEventListener('click', function (e) {
-      const btn = e.target.closest('.btn--bookmark');
-      if (!btn) return;
+  toggleButtonFill(button, action) {
+    if (!button || !action) return;
 
-      if (btn.dataset.filled === 'true') {
-        btn.querySelector('use').setAttribute('href', `${icons}#icon-bookmark`);
-        btn.dataset.filled = 'false';
-      } else {
-        btn
-          .querySelector('use')
-          .setAttribute('href', `${icons}#icon-bookmark-fill`);
-        btn.dataset.filled = 'true';
-      }
-    });
+    if (button.dataset.filled === 'true') {
+      button
+        .querySelector('use')
+        .setAttribute('href', `${icons}#icon-${action}`);
+      button.setAttribute('data-filled', 'false');
+    } else {
+      button
+        .querySelector('use')
+        .setAttribute('href', `${icons}#icon-${action}-fill`);
+      button.setAttribute('data-filled', 'true');
+    }
   }
 
-  _generatePartQuote() {
+  _generatePartDescription() {
     if (!this._data) return this.renderError();
 
-    return this._data.quote.split(' ').slice(0, 3).join(' ');
+    return this._data.description.split(' ').slice(0, 3).join(' ');
   }
 
-  _getRandomInt() {
+  _generateRandomInt() {
     const min = 2;
     const max = 10000;
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -216,7 +194,7 @@ export class PostView extends View {
           </section>
           <section class="post__likes">
             <div class="post__likes-count">
-              <span class="post__likes-data">${this._getRandomInt()}</span>
+              <span class="post__likes-data">${this._generateRandomInt()}</span>
               <span class="post__likes-text">likes</span>
             </div>
           </section>
@@ -226,14 +204,16 @@ export class PostView extends View {
                 <span class="post__description-username">${
                   this._data.username
                 }</span>
-                <span class="post__description-text">${this._generatePartQuote()}...</span>
+                <span class="post__description-text">${this._generatePartDescription()}...</span>
                 <span class="post__description-btn">more</span>
               </summary>
               <div>
                 <span class="post__description-username">${
                   this._data.username
                 }</span>
-                <span class="post__description-text">${this._data.quote}</span>
+                <span class="post__description-text">${
+                  this._data.description
+                }</span>
               </div>
             </details>
           </section>
@@ -243,8 +223,5 @@ export class PostView extends View {
         </div>
       </div>
     `;
-  }
-  siur() {
-    console.log('siur');
   }
 }

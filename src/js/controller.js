@@ -23,30 +23,29 @@ import { LoaderView } from './views/LoaderView';
 class Controller {
   constructor() {
     this.init();
-    this.createInitialPosts();
-    // this.controlPosts();
+    this.controlPosts();
   }
 
-  init() {
-    // const post = new PostView();
-    // post.addHandlerRender(this.controlPosts);
+  async init() {
     new HeaderView();
     new FooterView();
   }
 
-  async createInitialPosts() {
+  async controlPosts() {
+    // Create loader spinner
     const loader = new LoaderView();
-    // Load new Post
-    await model.loadPost();
-    // Render new post
-    // post.render(model.state.post);
 
+    // Load new Post Data
+    await model.loadPost();
+
+    // Create new post
     const post = new PostView(model.state.post);
 
+    // Destroy loader spinner
     loader.destroy();
 
     // Add observer to last post and eventually generate new one
-    // post.addHandlerObserver(this.controlPosts);
+    post.addHandlerObserver(this.controlPosts.bind(this));
   }
 }
 
