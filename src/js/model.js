@@ -142,22 +142,35 @@ export const loadPost = async function () {
     const resultsUsers = usersData.results;
     const resultsQuotes = quotesData.results;
     const { message } = imageData;
-    const comments = resultsUsers.map((user, i) => {
-      user.comment = resultsQuotes[i].content;
-      return user;
-    });
+    console.log(resultsUsers);
+
+    // const comments = resultsUsers.forEach((user, i) => {
+    //   user.comment = resultsQuotes[i].content;
+    //   return user;
+    // });
 
     // console.log(resultsUsers);
     // console.log(resultsQuotes);
 
     const userObject = resultsUsers.shift();
     userObject.description = resultsQuotes.shift().content;
+
+    // resultsUsers.map((key, value) => {
+    //   key.comments = resultsQuotes[value].content;
+    //   console.log(key);
+    // });
+
+    const comments = resultsUsers.map((user, i) => {
+      user.comment = resultsQuotes[i].content;
+      return user;
+    });
+
     userObject.postImage = message;
     userObject.comments = comments;
     userObject.likesCount = getRandomInt(0, 10000);
 
     createPostData(userObject);
-    // console.log(state.post);
+    console.log(state.post);
   } catch (err) {
     console.error(`${err} 💥💥💥💥`);
     throw err;
