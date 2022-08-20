@@ -3,18 +3,15 @@ import icons from '../../img/icons.svg';
 
 export class PostView extends View {
   _parentElement = document.querySelector('.posts');
-  _errorMessage = 'We could not load this post :(';
-  _message = '';
+  _errorMessage = 'We could not load this post 😥';
+  _message = 'This function is unsupported. Have some balloons 🎈🎈';
 
   constructor(data) {
     super();
 
     this.render(data);
 
-    // this.#addHandlerLike();
-    // this.#addHandlerComments();
-    // this.#addHandlerSend();
-    // this.#addHandlerBookmark();
+    this._optionsBtn = this._thisElement.querySelector('.btn--options');
     this._likeBtn = this._thisElement.querySelector('.btn--favorite');
     this._commentBtn = this._thisElement.querySelector('.btn--comment');
     this._sendBtn = this._thisElement.querySelector('.btn--send');
@@ -35,6 +32,10 @@ export class PostView extends View {
 
   #initButtons() {
     this._likeBtn.addEventListener('click', this.#likeButtonHandler.bind(this));
+    this._commentBtn.addEventListener(
+      'click',
+      this.#commentButtonHandler.bind(this),
+    );
     this._sendBtn.addEventListener('click', this.#sendButtonHandler.bind(this));
     this._bookmarkBtn.addEventListener(
       'click',
@@ -43,8 +44,6 @@ export class PostView extends View {
   }
 
   addHandlerObserver(handler) {
-    // console.count();
-
     const callback = (entries) => {
       if (entries[0].intersectionRatio === 1) {
         handler();
@@ -60,16 +59,6 @@ export class PostView extends View {
 
     const observer = new IntersectionObserver(callback, options);
 
-    // const posts = [...document.querySelectorAll('.post')];
-
-    // posts.forEach((post, id, posts) => {
-    //   observer.unobserve(post);
-    //   if (id === posts.length - 1) {
-    //     observer.observe(post);
-    //   }
-    // });
-
-    // observer.observe(posts.at(-1));
     observer.observe(this._thisElement);
   }
 
@@ -85,7 +74,9 @@ export class PostView extends View {
     this.toggleButtonFill(this._likeBtn, 'favorite');
   }
 
-  #commentButtonHandler() {}
+  #commentButtonHandler() {
+    this.renderMessage();
+  }
 
   #sendButtonHandler() {
     const postPhotoSrc =
@@ -97,8 +88,6 @@ export class PostView extends View {
 
     document.querySelector('.modal__copy')?.remove();
 
-    // console.log(`Copied photo URL: ${postPhotoSrc}`);
-
     const markup = `
     <div class="modal__copy">
       <div class="modal__copy-wrapper">
@@ -107,7 +96,9 @@ export class PostView extends View {
     </div>
   `;
 
-    document.querySelector('body').insertAdjacentHTML('afterbegin', markup);
+    document
+      .querySelector('.container')
+      .insertAdjacentHTML('afterbegin', markup);
     // this.insertAdjacentHTML('afterbegin', markup);
   }
 
@@ -140,6 +131,7 @@ export class PostView extends View {
   _generateRandomInt() {
     const min = 2;
     const max = 10000;
+
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
@@ -154,8 +146,8 @@ export class PostView extends View {
               class="post__top-user--img" />
             <span class="post__top-user--name">${this._data.username}</span>
           </div>
-          <button class="post__top-btn post__top--more">
-            <svg class="post__top-icon">
+          <button class="btn-tiny btn--more">
+            <svg>
               <use href="${icons}#icon-more"></use>
             </svg>
           </button>
