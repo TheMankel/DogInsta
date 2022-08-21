@@ -2,6 +2,7 @@ import * as model from './model';
 import { HeaderView } from './views/HeaderView';
 import { FooterView } from './views/FooterView';
 import { PostView } from './views/PostView';
+import { AccountView } from './views/AccountView';
 import { LoaderView } from './views/LoaderView';
 
 class Controller {
@@ -13,6 +14,7 @@ class Controller {
   async init() {
     new HeaderView();
     new FooterView();
+    model.state.account = new AccountView();
   }
 
   async controlPosts() {
@@ -30,6 +32,10 @@ class Controller {
 
     // Add observer to last post and eventually generate new one
     post.addHandlerObserver(this.controlPosts.bind(this));
+
+    // model.state.account = new AccountView();
+    console.log(model.state.account);
+    post.addHandlerAccount(model.state.account);
   }
 }
 
