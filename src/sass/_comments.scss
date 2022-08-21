@@ -12,6 +12,7 @@
     height: 48px;
     width: 48px;
     border-radius: 50%;
+    border: 1px solid #bfbfbf;
   }
 
   @media screen and (max-width: 513px) {
@@ -55,7 +56,6 @@
     img {
       display: flex;
       align-items: center;
-      padding: 5px;
     }
 
     span {
@@ -72,11 +72,6 @@
   &__post {
     padding: 8px 12px;
     border-bottom: 2px solid #ededed;
-
-    img {
-      border: 3px solid #bfbfbf;
-      padding: 2px;
-    }
   }
 
   &__nav-bottom {
@@ -91,7 +86,6 @@
     img {
       display: flex;
       align-items: center;
-      padding: 5px;
     }
 
     input {
