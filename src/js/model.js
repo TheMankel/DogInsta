@@ -20,7 +20,7 @@ export const state = {
 const createPostData = function (userObject) {
   state.post = {
     username: userObject.name.first,
-    profilePictures: userObject.picture,
+    picture: userObject.picture.thumbnail,
     postImage: userObject.postImage,
     description: userObject.description,
     comments: userObject.comments,
@@ -161,6 +161,8 @@ export const loadPost = async function () {
     // });
 
     const comments = resultsUsers.map((user, i) => {
+      user.name = user.name.first;
+      user.picture = user.picture.thumbnail;
       user.comment = resultsQuotes[i].content;
       return user;
     });
@@ -170,7 +172,7 @@ export const loadPost = async function () {
     userObject.likesCount = getRandomInt(0, 10000);
 
     createPostData(userObject);
-    // console.log(state.post);
+    console.log(state.post);
   } catch (err) {
     console.error(`${err} 💥💥💥💥`);
     throw err;
