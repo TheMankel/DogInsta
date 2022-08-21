@@ -126,7 +126,7 @@ const createPostData = function (userObject) {
 
 export const loadPost = async function () {
   try {
-    const randNum = getRandomInt(2, 5);
+    const randNum = getRandomInt(3, 5);
     const pageNum = getRandomInt(1, MAX_PAGE_NUM);
 
     const usersData = await getJSON(
@@ -142,7 +142,7 @@ export const loadPost = async function () {
     const resultsUsers = usersData.results;
     const resultsQuotes = quotesData.results;
     const { message } = imageData;
-    console.log(resultsUsers);
+    // console.log(resultsUsers);
 
     // const comments = resultsUsers.forEach((user, i) => {
     //   user.comment = resultsQuotes[i].content;
@@ -170,7 +170,7 @@ export const loadPost = async function () {
     userObject.likesCount = getRandomInt(0, 10000);
 
     createPostData(userObject);
-    console.log(state.post);
+    // console.log(state.post);
   } catch (err) {
     console.error(`${err} 💥💥💥💥`);
     throw err;

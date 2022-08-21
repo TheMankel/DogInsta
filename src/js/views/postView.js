@@ -75,12 +75,43 @@ export class PostView extends View {
   }
 
   #commentButtonHandler() {
-    console.log(this._data.comments);
+    // console.log(this._data.comments);
 
     const markup = `
-    <div class="modal__unsupported">
-      <div class="modal__unsupported-wrapper">
-        <button>X</button>
+    <div class="modal">
+      <div class="modal__nav-top">
+        <div class="modal__nav-top--left">
+          <button class="btn-tiny modal__nav-btn--back">
+            <svg>
+              <use href="${icons}#icon-arrow-back"></use>
+            </svg>
+          </button>
+          <span>Comments</span>
+        </div>
+        <div class="modal__nav-top--right">
+          <button class="btn-tiny modal__nav--send">
+            <svg>
+              <use href="${icons}#icon-send"></use>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="modal__post">
+        <img
+          src="${this._data.profilePictures.thumbnail}"
+          alt="Post photo" />
+        <span class="modal__comments-name">${this._data.username}</span>
+        <p class="modal__comments-text">${this._data.description}</p>
+      </div>
+      <section class="modal__comments">
+        ${this.#generateComments()}
+      </section>
+      <div class="modal__nav-bottom">
+        <img
+          src="${this._data.profilePictures.thumbnail}"
+          alt="Post photo" />
+        <input class="modal__comments-name" placeholder="Add comment..." type="text" autocorrect="off" autocomplete="off"></input>
+        <button class="btn-tiny modal__nav--post">Send</button>
       </div>
     </div>
   `;
@@ -89,11 +120,45 @@ export class PostView extends View {
       .querySelector('.container')
       .insertAdjacentHTML('afterbegin', markup);
 
+    // document
+    //   .querySelector('.modal__nav-top--left button')
+    //   .addEventListener('click', function () {
+    //     document.querySelector('.modal').remove();
+    //   });
+
+    // document
+    //   .querySelector('.modal__nav-top--right button')
+    //   .addEventListener('click', this.renderMessage.bind(this, this._message));
+
+    this.#initCommentsButtons();
+  }
+
+  #generateComments() {
+    return this._data.comments
+      .map((comment) => {
+        return `
+        <div class="modal__comments-comment">
+          <img
+            src="${comment.picture.thumbnail}"
+            alt="Post photo" />
+          <span class="modal__comments-name">${comment.name.first}</span>
+          <p class="modal__comments-text">${comment.comment}</p>
+        </div>
+      `;
+      })
+      .join('');
+  }
+
+  #initCommentsButtons() {
     document
-      .querySelector('.modal__unsupported button')
+      .querySelector('.modal__nav-top--left button')
       .addEventListener('click', function () {
-        document.querySelector('.modal__unsupported').remove();
+        document.querySelector('.modal').remove();
       });
+
+    document
+      .querySelector('.modal__nav-top--right button')
+      .addEventListener('click', this.renderMessage.bind(this, this._message));
   }
 
   #sendButtonHandler() {
