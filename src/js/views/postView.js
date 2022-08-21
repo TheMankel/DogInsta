@@ -11,7 +11,7 @@ export class PostView extends View {
 
     this.render(data);
 
-    this._optionsBtn = this._thisElement.querySelector('.btn--options');
+    this._moreBtn = this._thisElement.querySelector('.btn--more');
     this._likeBtn = this._thisElement.querySelector('.btn--favorite');
     this._commentBtn = this._thisElement.querySelector('.btn--comment');
     this._sendBtn = this._thisElement.querySelector('.btn--send');
@@ -31,6 +31,10 @@ export class PostView extends View {
   // }
 
   #initButtons() {
+    this._moreBtn.addEventListener(
+      'click',
+      this.renderMessage.bind(this, this.message),
+    );
     this._likeBtn.addEventListener('click', this.#likeButtonHandler.bind(this));
     this._commentBtn.addEventListener(
       'click',
@@ -62,6 +66,14 @@ export class PostView extends View {
     observer.observe(this._thisElement);
   }
 
+  addHandlerAccount(account) {
+    this._account = account;
+  }
+
+  // setAccountData(data) {
+  //   this._accountData = data;
+  // }
+
   #likeButtonHandler() {
     const likesNum = this._thisElement.querySelector('.post__likes-data');
 
@@ -75,9 +87,17 @@ export class PostView extends View {
   }
 
   #commentButtonHandler() {
-    // console.log(this._data.comments);
+    const markup = this.#generateCommentsMarkup();
 
-    const markup = `
+    document
+      .querySelector('.container')
+      .insertAdjacentHTML('afterbegin', markup);
+
+    this.#initCommentsButtons();
+  }
+
+  #generateCommentsMarkup() {
+    return `
     <div class="modal">
       <div class="modal__nav-top">
         <div class="modal__nav-top--left">
@@ -98,7 +118,7 @@ export class PostView extends View {
       </div>
       <div class="modal__post">
         <img
-          src="${this._data.profilePictures.thumbnail}"
+          src="${this._data.picture}"
           alt="Post photo" />
         <span class="modal__comments-name">${this._data.username}</span>
         <p class="modal__comments-text">${this._data.description}</p>
@@ -108,29 +128,13 @@ export class PostView extends View {
       </section>
       <div class="modal__nav-bottom">
         <img
-          src="${this._data.profilePictures.thumbnail}"
+          src="${this._account._profilePicture}"
           alt="Post photo" />
         <input class="modal__comments-name" placeholder="Add comment..." type="text" autocorrect="off" autocomplete="off"></input>
         <button class="btn-tiny modal__nav--post">Send</button>
       </div>
     </div>
   `;
-
-    document
-      .querySelector('.container')
-      .insertAdjacentHTML('afterbegin', markup);
-
-    // document
-    //   .querySelector('.modal__nav-top--left button')
-    //   .addEventListener('click', function () {
-    //     document.querySelector('.modal').remove();
-    //   });
-
-    // document
-    //   .querySelector('.modal__nav-top--right button')
-    //   .addEventListener('click', this.renderMessage.bind(this, this._message));
-
-    this.#initCommentsButtons();
   }
 
   #generateComments() {
@@ -139,9 +143,9 @@ export class PostView extends View {
         return `
         <div class="modal__comments-comment">
           <img
-            src="${comment.picture.thumbnail}"
+            src="${comment.picture}"
             alt="Post photo" />
-          <span class="modal__comments-name">${comment.name.first}</span>
+          <span class="modal__comments-name">${comment.name}</span>
           <p class="modal__comments-text">${comment.comment}</p>
         </div>
       `;
@@ -159,6 +163,56 @@ export class PostView extends View {
     document
       .querySelector('.modal__nav-top--right button')
       .addEventListener('click', this.renderMessage.bind(this, this._message));
+
+    document
+      .querySelector('.modal__nav-bottom button')
+      .addEventListener('click', this.#addComment.bind(this));
+
+    const helper = this;
+
+    document
+      .querySelector('.modal__nav-bottom input')
+      .addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          helper.#addComment();
+        }
+      });
+  }
+
+  #addComment() {
+    const input = document.querySelector('.modal__nav-bottom input');
+    const comment = input.value.trim();
+    if (!comment) {
+      input.value = '';
+      return;
+    }
+
+    const markup = `
+      <div class="modal__comments-comment">
+        <img
+          src="${this._account._profilePicture}"
+          alt="Post photo" />
+        <span class="modal__comments-name">${this._account._username}</span>
+        <p class="modal__comments-text">${comment}</p>
+      </div>
+    `;
+
+    document
+      .querySelector('.modal__comments')
+      .insertAdjacentHTML('beforeend', markup);
+
+    input.value = '';
+
+    const newCommentObj = {
+      comment: comment,
+      name: this._data.username,
+      picture: this._data.picture,
+    };
+    this._data.comments.push(newCommentObj);
+
+    this._thisElement.querySelector(
+      '.post__comments span',
+    ).textContent = `View ${this._data.comments.length} comments`;
   }
 
   #sendButtonHandler() {
@@ -186,6 +240,13 @@ export class PostView extends View {
   }
 
   #bookmarkButtonHandler() {
+    if (this._bookmarkBtn.getAttribute('data-filled') === 'true') {
+      const index = this._account._bookmarks.indexOf(this._data);
+      this._account._bookmarks.splice(index, 1);
+    } else {
+      this._account._bookmarks.push(this._data);
+    }
+
     this.toggleButtonFill(this._bookmarkBtn, 'bookmark');
   }
 
@@ -211,20 +272,13 @@ export class PostView extends View {
     return this._data.description.split(' ').slice(0, 3).join(' ');
   }
 
-  // _generateRandomInt() {
-  //   const min = 2;
-  //   const max = 10000;
-
-  //   return Math.floor(Math.random() * (max - min + 1)) + min;
-  // }
-
   _generateMarkup() {
     return `
       <div class="post">
         <div class="post__top">
           <div class="post__top-user">
             <img
-              src="${this._data.profilePictures.thumbnail}"
+              src="${this._data.picture}"
               alt="Account icon"
               class="post__top-user--img" />
             <span class="post__top-user--name">${this._data.username}</span>
