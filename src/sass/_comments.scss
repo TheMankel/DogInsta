@@ -1,0 +1,111 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  z-index: 10;
+
+  img {
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+  }
+
+  @media screen and (max-width: 513px) {
+    img {
+      height: 32px;
+      width: 32px;
+    }
+  }
+
+  &__nav-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    width: 100%;
+    font-weight: 600;
+    font-size: 24px;
+
+    &--left {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+    }
+  }
+
+  &__comments {
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+  }
+
+  &__post,
+  &__comments-comment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    width: 100%;
+    gap: 8px;
+
+    img {
+      display: flex;
+      align-items: center;
+      padding: 5px;
+    }
+
+    span {
+      padding: 0 4px;
+      text-align: center;
+      font-weight: 600;
+      // overflow-wrap: break-word;
+    }
+    p {
+      width: 100%;
+    }
+  }
+
+  &__post {
+    padding: 8px 12px;
+    border-bottom: 2px solid #ededed;
+
+    img {
+      border: 3px solid #bfbfbf;
+      padding: 2px;
+    }
+  }
+
+  &__nav-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 12px;
+    width: 100%;
+    gap: 8px;
+    border-top: 2px solid #ededed;
+
+    img {
+      display: flex;
+      align-items: center;
+      padding: 5px;
+    }
+
+    input {
+      padding: 0 4px;
+      width: 100%;
+      font-size: 16px;
+      outline: none;
+    }
+
+    button {
+      padding: 0 4px;
+      color: rgb(0, 149, 246);
+      font-weight: 600;
+      font-size: 16px;
+    }
+  }
+}
