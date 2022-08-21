@@ -13,8 +13,14 @@ import { getJSON, getRandomInt } from './helpers';
 
 export const state = {
   post: {},
-  userPosts: [],
-  bookmarks: [],
+  account: {},
+  // username: 'User',
+  //   profilePicture: 'https://avatars.githubusercontent.com/u/26410548?v=4',
+  //   bio: 'Someone cool 😎',
+  //   posts: [],
+  //   fallowers: '21',
+  //   following: '37',
+  //   bookmarks: [],
 };
 
 const createPostData = function (userObject) {
@@ -172,7 +178,7 @@ export const loadPost = async function () {
     userObject.likesCount = getRandomInt(0, 10000);
 
     createPostData(userObject);
-    console.log(state.post);
+    // console.log(state.post);
   } catch (err) {
     console.error(`${err} 💥💥💥💥`);
     throw err;
