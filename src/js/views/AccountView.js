@@ -3,10 +3,9 @@ import View from './View';
 export class AccountView extends View {
   _message = 'This function is unsupported. Have some balloons 🎈🎈';
 
-  constructor(data) {
+  constructor() {
     super();
 
-    // this._data = data;
     this._username = 'User';
     this._profilePicture =
       'https://avatars.githubusercontent.com/u/26410548?v=4';
