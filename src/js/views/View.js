@@ -1,18 +1,15 @@
-import icons from '../../img/icons.svg';
-
 export default class View {
-  _thisElement;
-  _data;
-
-  render(data) {
+  render(data, postPlace) {
     if (!data) return this.renderError();
 
     this._data = data;
 
     const markup = this._generateMarkup();
 
-    this._parentElement.insertAdjacentHTML('beforeend', markup);
-    this._thisElement = this._parentElement.lastElementChild;
+    this._parentElement.insertAdjacentHTML(postPlace, markup);
+    if (postPlace === 'beforeend')
+      this._thisElement = this._parentElement.lastElementChild;
+    else this._thisElement = this._parentElement.firstElementChild;
   }
 
   renderError(message = this._errorMessage) {
@@ -40,5 +37,10 @@ export default class View {
       .addEventListener('click', function () {
         document.querySelector('.modal__unsupported').remove();
       });
+  }
+
+  addHandlerAccount(account) {
+    this._account = account;
+    console.log(this._account);
   }
 }
