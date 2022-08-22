@@ -18,7 +18,6 @@ class Controller {
 
     header.addHandlerAccount(model.state.account);
     footer.addHandlerAccount(model.state.account);
-    console.log(header);
   }
 
   async controlPosts() {

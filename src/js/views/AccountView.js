@@ -23,8 +23,4 @@ export class AccountView extends View {
     // following: '37',
     // bookmarks: [],
   }
-
-  // getAccountData() {
-  //   return this._data;
-  // }
 }
