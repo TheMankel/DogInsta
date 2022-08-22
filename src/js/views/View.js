@@ -7,6 +7,7 @@ export default class View {
     const markup = this._generateMarkup();
 
     this._parentElement.insertAdjacentHTML(postPlace, markup);
+
     if (postPlace === 'beforeend')
       this._thisElement = this._parentElement.lastElementChild;
     else this._thisElement = this._parentElement.firstElementChild;
@@ -17,8 +18,6 @@ export default class View {
   }
 
   renderMessage(message = this._message) {
-    // console.log(message);
-
     const markup = `
     <div class="modal__unsupported">
       <div class="modal__unsupported-wrapper">
@@ -41,6 +40,5 @@ export default class View {
 
   addHandlerAccount(account) {
     this._account = account;
-    console.log(this._account);
   }
 }

@@ -18,8 +18,6 @@ export class PostView extends View {
     this._bookmarkBtn = this._thisElement.querySelector('.btn--bookmark');
 
     this.#initButtons();
-
-    console.log(this._thisElement);
   }
 
   // addHandlerRender(handler) {
@@ -68,10 +66,6 @@ export class PostView extends View {
     observer.observe(this._thisElement);
   }
 
-  // setAccountData(data) {
-  //   this._accountData = data;
-  // }
-
   #likeButtonHandler() {
     const likesNum = this._thisElement.querySelector('.post__likes-data');
 
@@ -81,7 +75,7 @@ export class PostView extends View {
       likesNum.textContent = +likesNum.textContent + 1;
     }
 
-    this.toggleButtonFill(this._likeBtn, 'favorite');
+    this.#toggleButtonFill(this._likeBtn, 'favorite');
   }
 
   #commentButtonHandler() {
@@ -152,6 +146,8 @@ export class PostView extends View {
   }
 
   #initCommentsButtons() {
+    const helper = this;
+
     document
       .querySelector('.modal__nav-top--left button')
       .addEventListener('click', function () {
@@ -165,8 +161,6 @@ export class PostView extends View {
     document
       .querySelector('.modal__nav-bottom button')
       .addEventListener('click', this.#addComment.bind(this));
-
-    const helper = this;
 
     document
       .querySelector('.modal__nav-bottom input')
@@ -202,26 +196,45 @@ export class PostView extends View {
 
     input.value = '';
 
-    const newCommentObj = {
-      comment: comment,
-      name: this._data.username,
-      picture: this._data.picture,
-    };
+    // const newCommentObj = {
+    //   comment: comment,
+    //   name: this._account._username,
+    //   picture: this._account._profilePicture,
+    // };
+    const newCommentObject = this.#createNewCommentObject(comment);
 
-    this._data.comments.push(newCommentObj);
+    // this._data.comments.push(newComment);
+
+    // this._thisElement.querySelector(
+    //   '.post__comments span',
+    // ).textContent = `View ${this._data.comments.length} comments`;
+
+    this.#updateComments(newCommentObject);
+  }
+
+  #updateComments(newCommentObject) {
+    this._data.comments.push(newCommentObject);
 
     this._thisElement.querySelector(
       '.post__comments span',
     ).textContent = `View ${this._data.comments.length} comments`;
   }
 
+  #createNewCommentObject(comment) {
+    return {
+      comment: comment,
+      name: this._account._username,
+      picture: this._account._profilePicture,
+    };
+  }
+
   #sendButtonHandler() {
     const postPhotoSrc =
       this._thisElement.querySelector('.post__photo img').src;
 
-    navigator.clipboard.writeText(postPhotoSrc);
-
     if (!postPhotoSrc) return;
+
+    navigator.clipboard.writeText(postPhotoSrc);
 
     document.querySelector('.modal__copy')?.remove();
 
@@ -247,10 +260,10 @@ export class PostView extends View {
       this._account._bookmarks.push(this._data);
     }
 
-    this.toggleButtonFill(this._bookmarkBtn, 'bookmark');
+    this.#toggleButtonFill(this._bookmarkBtn, 'bookmark');
   }
 
-  toggleButtonFill(button, action) {
+  #toggleButtonFill(button, action) {
     if (!button || !action) return;
 
     if (button.dataset.filled === 'true') {
@@ -266,7 +279,7 @@ export class PostView extends View {
     }
   }
 
-  _generatePartDescription() {
+  #generatePartDescription() {
     if (!this._data) return this.renderError();
 
     return this._data.description.split(' ').slice(0, 3).join(' ');
@@ -333,7 +346,7 @@ export class PostView extends View {
                 <span class="post__description-username">${
                   this._data.username
                 }</span>
-                <span class="post__description-text">${this._generatePartDescription()}...</span>
+                <span class="post__description-text">${this.#generatePartDescription()}...</span>
                 <span class="post__description-btn">more</span>
               </summary>
               <div>
