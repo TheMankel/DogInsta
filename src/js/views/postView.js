@@ -6,10 +6,10 @@ export class PostView extends View {
   _errorMessage = 'We could not load this post 😥';
   _message = 'This function is unsupported. Have some balloons 🎈🎈';
 
-  constructor(data) {
+  constructor(data, postPlace = 'beforeend') {
     super();
 
-    this.render(data);
+    this.render(data, postPlace);
 
     this._moreBtn = this._thisElement.querySelector('.btn--more');
     this._likeBtn = this._thisElement.querySelector('.btn--favorite');
@@ -18,6 +18,8 @@ export class PostView extends View {
     this._bookmarkBtn = this._thisElement.querySelector('.btn--bookmark');
 
     this.#initButtons();
+
+    console.log(this._thisElement);
   }
 
   // addHandlerRender(handler) {
@@ -64,10 +66,6 @@ export class PostView extends View {
     const observer = new IntersectionObserver(callback, options);
 
     observer.observe(this._thisElement);
-  }
-
-  addHandlerAccount(account) {
-    this._account = account;
   }
 
   // setAccountData(data) {
@@ -182,6 +180,7 @@ export class PostView extends View {
   #addComment() {
     const input = document.querySelector('.modal__nav-bottom input');
     const comment = input.value.trim();
+
     if (!comment) {
       input.value = '';
       return;
@@ -208,6 +207,7 @@ export class PostView extends View {
       name: this._data.username,
       picture: this._data.picture,
     };
+
     this._data.comments.push(newCommentObj);
 
     this._thisElement.querySelector(
