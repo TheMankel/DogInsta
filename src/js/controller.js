@@ -12,9 +12,13 @@ class Controller {
   }
 
   async init() {
-    new HeaderView();
-    new FooterView();
+    const header = new HeaderView();
+    const footer = new FooterView();
     model.state.account = new AccountView();
+
+    header.addHandlerAccount(model.state.account);
+    footer.addHandlerAccount(model.state.account);
+    console.log(header);
   }
 
   async controlPosts() {
@@ -34,7 +38,6 @@ class Controller {
     post.addHandlerObserver(this.controlPosts.bind(this));
 
     // model.state.account = new AccountView();
-    console.log(model.state.account);
     post.addHandlerAccount(model.state.account);
   }
 }
