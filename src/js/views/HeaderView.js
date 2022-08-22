@@ -15,6 +15,7 @@ import gallery_12 from '../../img/gallery/gallery-12.avif';
 import gallery_13 from '../../img/gallery/gallery-13.avif';
 import gallery_14 from '../../img/gallery/gallery-14.avif';
 import gallery_15 from '../../img/gallery/gallery-15.avif';
+import { PostView } from './PostView';
 
 export class HeaderView extends View {
   _message = 'This function is unsupported. Have some balloons 🎈🎈';
@@ -59,29 +60,94 @@ export class HeaderView extends View {
   }
 
   #initPostPhotoButtons() {
-    const postModal = document.querySelector('.modal');
-    postModal
-      .querySelector('.btn--cancel')
-      .addEventListener('click', function () {
-        postModal.remove();
-      });
-    console.log(postModal.querySelector('.modal__photos'));
-    postModal
-      .querySelector('.modal__photos')
-      .addEventListener('click', function (e) {
-        const img = e.target.closest('img');
-        if (!img) return;
+    const modal = document.querySelector('.modal__gallery');
+    const images = modal.querySelectorAll('img');
+    const nav = modal.querySelector('.modal__nav');
+    const modalPhotos = modal.querySelector('.modal__photos');
+    let selectedImgSrc = '';
+    const helper = this;
 
-        postModal
-          .querySelectorAll('img')
-          .forEach((img) => img.classList.remove('active'));
-        img.classList.toggle('active');
+    modal.querySelector('.btn--cancel').addEventListener('click', function () {
+      modal.remove();
+    });
+
+    modalPhotos.addEventListener('click', function (e) {
+      const selectedImg = e.target.closest('img');
+      if (!selectedImg) return;
+
+      images.forEach((img) => img.classList.remove('active'));
+
+      selectedImg.classList.toggle('active');
+      selectedImgSrc = selectedImg.src;
+    });
+
+    modal
+      .querySelector('.btn--arrow-post')
+      .addEventListener('click', function () {
+        if (selectedImgSrc) {
+          modalPhotos.remove();
+          modal.querySelector('.modal__bottom').remove();
+
+          const markup = `
+          <section class="modal__post">
+            <div class="modal__post-photo">
+              <img
+                src="${selectedImgSrc}"
+                alt="Post photo" />
+            </div>
+          </section>
+          <div class="modal__bottom--input">
+            <img
+              src="${selectedImgSrc}"
+              alt="Profile picture" />
+            <input class="modal__bottom-description" placeholder="Add description..." type="text" autocorrect="off" autocomplete="off"></input>
+          </div>
+          `;
+
+          const markupBtn = `
+          <button class="btn-tiny btn--check">
+            <svg>
+              <use href="${icons}#icon-check"></use>
+            </svg>
+          </button>
+          `;
+
+          nav.insertAdjacentHTML('afterend', markup);
+          nav.insertAdjacentHTML('beforeend', markupBtn);
+
+          modal
+            .querySelector('.btn--check')
+            .addEventListener('click', function () {
+              const input = modal.querySelector('.modal__bottom-description');
+              const description = input.value.trim();
+
+              if (!description) {
+                input.value = '';
+                return;
+              }
+
+              const data = {
+                username: helper._account._username,
+                picture: helper._account._profilePicture,
+                postImage: selectedImgSrc,
+                description: description,
+                comments: [],
+                likesCount: 0,
+              };
+
+              const post = new PostView(data, 'afterbegin');
+              post.addHandlerAccount(helper._account);
+              modal.remove();
+            });
+
+          this.remove();
+        }
       });
   }
 
   #postPhotoButtonHandler() {
     const markup = `
-      <div class="modal">
+      <div class="modal__gallery">
         <nav class="modal__nav">
           <button class="btn-tiny btn--cancel">
             <svg>
