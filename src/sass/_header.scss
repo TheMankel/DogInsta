@@ -2,7 +2,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 4px 0;
   border-bottom: 2px solid #ededed;
 
   &__logo {
@@ -22,11 +21,6 @@
   }
 
   .nav {
-    // &__icon {
-    //   height: 32px;
-    //   width: 32px;
-    //   margin: 8px;
-    // }
     margin-right: 16px;
 
     &__list {
