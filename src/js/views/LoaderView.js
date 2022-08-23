@@ -19,6 +19,10 @@ export class LoaderView {
       </div>
     `;
 
+    // const markup = `
+    //   <div class="loading"></div>
+    // `;
+
     this._parentElement.insertAdjacentHTML('beforeend', markup);
   }
 
