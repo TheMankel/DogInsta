@@ -22,89 +22,91 @@
     }
   }
 
-  &__nav-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 6px 16px;
-    width: 100%;
-    font-weight: 600;
-    font-size: 24px;
-    margin-bottom: 2px;
-
-    &--left {
+  .modal {
+    &__nav-top {
       display: flex;
       justify-content: space-between;
-      gap: 24px;
-    }
-  }
-
-  &__comments {
-    height: 100%;
-    width: 100%;
-    overflow-y: scroll;
-  }
-
-  &__post,
-  &__comments-comment {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 12px;
-    width: 100%;
-    gap: 8px;
-
-    img {
-      display: flex;
       align-items: center;
-    }
-
-    span {
-      padding: 0 4px;
-      text-align: center;
-      font-weight: 600;
-      // overflow-wrap: break-word;
-    }
-    p {
+      padding: 6px 16px;
       width: 100%;
+      font-weight: 600;
+      font-size: 24px;
+      margin-bottom: 2px;
+
+      &--left {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+      }
     }
-  }
 
-  &__post {
-    padding: 8px 12px;
-    border-bottom: 2px solid #ededed;
-  }
+    &__comments {
+      height: 100%;
+      width: 100%;
+      overflow-y: scroll;
+    }
 
-  &__nav-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 4px 12px;
-    width: 100%;
-    gap: 8px;
-    border-top: 2px solid #ededed;
-
-    img {
+    &__post,
+    &__comments-comment {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-    }
-
-    input {
-      padding: 0 4px;
+      padding: 8px 12px;
       width: 100%;
-      font-size: 16px;
-      outline: none;
+      gap: 8px;
+
+      img {
+        display: flex;
+        align-items: center;
+      }
+
+      span {
+        padding: 0 4px;
+        text-align: center;
+        font-weight: 600;
+        // overflow-wrap: break-word;
+      }
+      p {
+        width: 100%;
+      }
     }
 
-    button {
-      padding: 0 4px;
-      color: rgb(0, 149, 246);
-      font-weight: 600;
-      font-size: 16px;
+    &__post {
+      padding: 8px 12px;
+      border-bottom: 2px solid #ededed;
     }
 
-    button:after {
-      outline: none;
+    &__nav-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 12px;
+      width: 100%;
+      gap: 8px;
+      border-top: 2px solid #ededed;
+
+      img {
+        display: flex;
+        align-items: center;
+      }
+
+      input {
+        padding: 0 4px;
+        width: 100%;
+        font-size: 16px;
+        outline: none;
+      }
+
+      button {
+        padding: 0 4px;
+        color: rgb(0, 149, 246);
+        font-weight: 600;
+        font-size: 16px;
+      }
+
+      button:after {
+        outline: none;
+      }
     }
   }
 }
