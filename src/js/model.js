@@ -13,7 +13,15 @@ import { getJSON, getRandomInt } from './helpers';
 
 export const state = {
   post: {},
-  account: {},
+  account: {
+    username: 'User',
+    profilePicture: 'https://avatars.githubusercontent.com/u/26410548?v=4',
+    bio: 'Someone cool 😎',
+    posts: [],
+    fallowers: '21',
+    following: '37',
+    bookmarks: [],
+  },
   // username: 'User',
   //   profilePicture: 'https://avatars.githubusercontent.com/u/26410548?v=4',
   //   bio: 'Someone cool 😎',
@@ -148,23 +156,9 @@ export const loadPost = async function () {
     const resultsUsers = usersData.results;
     const resultsQuotes = quotesData.results;
     const { message } = imageData;
-    // console.log(resultsUsers);
-
-    // const comments = resultsUsers.forEach((user, i) => {
-    //   user.comment = resultsQuotes[i].content;
-    //   return user;
-    // });
-
-    // console.log(resultsUsers);
-    // console.log(resultsQuotes);
 
     const userObject = resultsUsers.shift();
     userObject.description = resultsQuotes.shift().content;
-
-    // resultsUsers.map((key, value) => {
-    //   key.comments = resultsQuotes[value].content;
-    //   console.log(key);
-    // });
 
     const comments = resultsUsers.map((user, i) => {
       user.name = user.name.first;

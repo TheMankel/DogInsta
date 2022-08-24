@@ -5,44 +5,118 @@ import { PostView } from './views/PostView';
 import { AccountView } from './views/AccountView';
 import { LoaderView } from './views/LoaderView';
 
-class Controller {
-  constructor() {
-    this.init();
-    this.controlPosts();
-  }
+// class Controller {
+//   constructor() {
+//     this.init();
+//     this.controlPosts();
+//   }
 
-  async init() {
-    const header = new HeaderView();
-    const footer = new FooterView();
-    model.state.account = new AccountView();
+//   async init() {
+//     const header = new HeaderView();
+//     const footer = new FooterView();
+//     model.state.account = new AccountView();
 
-    header.addHandlerAccount(model.state.account);
-    footer.addHandlerAccount(model.state.account);
-  }
+//     header.addHandlerAccount(model.state.account);
+//     footer.addHandlerAccount(model.state.account);
+//   }
 
-  async controlPosts() {
-    // Create loader spinner
-    const loader = new LoaderView();
+//   async controlPosts() {
+//     // Create loader spinner
+//     const loader = new LoaderView();
 
-    // Load new Post Data
-    await model.loadPost();
+//     // Load new Post Data
+//     await model.loadPost();
 
-    // Create new post
-    const post = new PostView(model.state.post);
+//     // Create new post
+//     const post = new PostView(model.state.post);
 
-    // Destroy loader spinner
-    loader.destroy();
+//     // Destroy loader spinner
+//     loader.destroy();
 
-    // Add observer to last post and eventually generate new one
-    post.addHandlerObserver(this.controlPosts.bind(this));
+//     // Add observer to last post and eventually generate new one
+//     post.addHandlerObserver(this.addObserver.bind(this));
 
-    // model.state.account = new AccountView();
-    post.addHandlerAccount(model.state.account);
-  }
+//     // model.state.account = new AccountView();
+//     post.addHandlerAccount(model.state.account);
+//   }
 
-  controlAddNewPost() {
-    const newPost = new GalleryView();
-  }
-}
+//   addObserver(post) {
+//     console.log(post);
+//     const callback = (entries) => {
+//       if (entries[0].intersectionRatio === 1) {
+//         this.controlPosts();
+//         observer.unobserve(entries[0].target);
+//       }
+//     };
 
-new Controller();
+//     const options = {
+//       root: null,
+//       rootMargin: '0px',
+//       threshold: [0.25, 0.5, 0.75, 1],
+//     };
+
+//     const observer = new IntersectionObserver(callback, options);
+
+//     observer.observe(post);
+//   }
+
+//   controlAddNewPost() {
+//     const newPost = new GalleryView();
+//   }
+// }
+
+// new Controller();
+
+const controlPosts = async function () {
+  // Create loader spinner
+  const loader = new LoaderView();
+
+  // Load new Post Data
+  await model.loadPost();
+
+  // Create new post
+  const post = new PostView(model.state.post);
+
+  // Destroy loader spinner
+  loader.destroy();
+
+  // Add observer to last post and eventually generate new one
+  post.addHandlerObserver(addObserver);
+
+  // model.state.account = new AccountView();
+  post.addHandlerAccount(model.state.account);
+};
+
+const addObserver = function (post) {
+  const callback = (entries) => {
+    if (entries[0].intersectionRatio === 1) {
+      controlPosts();
+      observer.unobserve(entries[0].target);
+    }
+  };
+
+  const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: [0.25, 0.5, 0.75, 1],
+  };
+
+  const observer = new IntersectionObserver(callback, options);
+
+  observer.observe(post);
+};
+
+const init = async function () {
+  const header = new HeaderView();
+  const footer = new FooterView();
+  // const account = new AccountView();
+
+  header.addHandlerAccount(model.state.account);
+  footer.addHandlerAccount(model.state.account);
+
+  // account.addHandlerAccount(model.state.account);
+
+  controlPosts();
+};
+
+init();
