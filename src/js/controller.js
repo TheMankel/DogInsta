@@ -68,26 +68,45 @@ import { LoaderView } from './views/LoaderView';
 // new Controller();
 
 const controlPosts = async function () {
-  // Create loader spinner
-  const loader = new LoaderView();
+  try {
+    // Create loader spinner
+    const loader = new LoaderView();
 
-  // Load new Post Data
-  await model.loadPost();
+    // Load new Post Data
+    await model.loadPost();
 
-  // Create new post
-  const post = new PostView(model.state.post);
+    // Create new post
+    const post = new PostView(model.state.post);
 
-  // Destroy loader spinner
-  loader.destroy();
+    // Render new post and insert it before end
+    post.render('beforeend');
 
-  // Add observer to last post and eventually generate new one
-  post.addHandlerObserver(addObserver);
+    // Init post buttons
+    post.initButtons();
 
-  // model.state.account = new AccountView();
-  post.addHandlerAccount(model.state.account);
+    // Destroy loader spinner
+    loader.destroy();
+
+    // Add observer to last post and eventually generate new one
+    post.addHandlerObserver(addObserver);
+
+    // model.state.account = new AccountView();
+    post.addHandlerAccount(model.state.account);
+  } catch (err) {
+    // Create new post
+    const post = new PostView(model.state.post);
+
+    // Render error message
+    post.renderError();
+
+    // Add observer to last post and eventually generate new one
+    post.addHandlerObserver(addObserver);
+    // console.log(err);
+  }
 };
 
 const addObserver = function (post) {
+  console.log(post);
   const callback = (entries) => {
     if (entries[0].intersectionRatio === 1) {
       controlPosts();
