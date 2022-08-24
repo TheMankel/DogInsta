@@ -1,4 +1,5 @@
 import View from './View';
+import { AccountView } from './AccountView';
 
 export class FooterView extends View {
   _message = 'This function is unsupported. Have some balloons 🎈🎈';
@@ -30,9 +31,13 @@ export class FooterView extends View {
         // window.location.href = '/';
         break;
       case btn.classList.contains('nav__btn--account'):
-        console.log(this);
+        console.log(this._account);
         // window.history.pushState(null, '', `/user`);
         // window.location.href = `${this._account._username}`;
+        // const account = new AccountView();
+        // account.addHandlerAccount(this._account);
+        // account.render('siusiaki', 'afterbegin');
+
         // this._account.render('siusiaki', 'afterbegin');
         break;
       default:
