@@ -9,7 +9,10 @@ I created this Instragram copy (but for dogs) to practice and to test myself in 
 - Object oriented JavaScript
 - MVC architectural pattern
 - JS Class inheritance
-- Fetching data from API (https://dog.ceo/dog-api/)
+- Fetching data from APIs:
+  - Post photo of dog: https://dog.ceo/dog-api/
+  - User data: https://randomuser.me/api/
+  - Description and comments data: https://quotable.io/quotes/
 - Async functionality and error handling
 - Event propagation
 - SCSS for styling components
@@ -17,13 +20,12 @@ I created this Instragram copy (but for dogs) to practice and to test myself in 
 
 Working features:
 
-- Add photo
-- Add comment
-- Add photo with description
+- Render random post with infinite scroll
+- Add comments
+- Add post with description
 - Like post
-- Copy image URL to clipboard
+- Copy post image URL to clipboard
 - Bookmark post
 - Show user profile
-- Infinite scroll
 
-Demo - soon
+Demo: soon
