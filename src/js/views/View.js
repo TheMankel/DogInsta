@@ -1,3 +1,5 @@
+import icons from '../../img/icons.svg';
+
 export default class View {
   render(postPlace) {
     if (!this._data) return this.renderError();
@@ -12,18 +14,32 @@ export default class View {
   }
 
   renderError(message = this._errorMessage) {
-    console.error(message);
+    // console.error(message);
+    const markup = `
+      <div class="error">
+        <div>
+          <svg>
+            <use href="${icons}#icon-error"></use>
+          </svg>
+        </div>
+        <p>${message}</p>
+      </div>
+    `;
+
+    this._parentElement.insertAdjacentHTML('beforeend', markup);
+    this._thisElement = this._parentElement.lastElementChild;
+    document.querySelector('.loading__spinner').remove();
   }
 
   renderMessage(message = this._message) {
     const markup = `
-    <div class="modal__unsupported">
-      <div class="modal__unsupported-wrapper">
-        <span>${message}</span>
-        <button>Ok</button>
+      <div class="modal__unsupported">
+        <div class="modal__unsupported-wrapper">
+          <span>${message}</span>
+          <button>Ok</button>
+        </div>
       </div>
-    </div>
-  `;
+    `;
 
     document
       .querySelector('.container')
