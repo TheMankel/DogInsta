@@ -1,6 +1,7 @@
 import View from './View';
 import { PostView } from './PostView';
 import icons from '../../img/icons.svg';
+import { LoaderView } from './LoaderView';
 
 export class GalleryView extends View {
   _parentElement = document.querySelector('.container');
@@ -11,6 +12,8 @@ export class GalleryView extends View {
     this._data = data;
     this.render('afterbegin');
     this.#init();
+    this.#generateGalleryImages();
+    this.loadPhotos();
   }
 
   #init() {
@@ -97,18 +100,35 @@ export class GalleryView extends View {
   }
 
   #generateGalleryImages() {
-    let markup = ``;
+    const photoWrapper = this._modal.querySelector('.modal__photos-wrapper');
+
     for (let i = 0; i < this._data.length; i++) {
-      markup += `
-                <div class="modal__photos-img">
-                  <img
-                  src="${this._data[i]}"
-                  alt="Gallery photo" />
-                </div>
-              `;
+      const markup = `
+        <div class="modal__photos-img">
+        </div>
+      `;
+      photoWrapper.insertAdjacentHTML('afterbegin', markup);
+      new LoaderView('modal__photos-img');
+      photoWrapper.querySelector('.loading__spinner').style.height = 'auto';
     }
-    // console.log(markup);
-    return markup;
+  }
+
+  loadPhotos() {
+    const photoPlaces = this._modal.querySelectorAll('.modal__photos-img');
+
+    photoPlaces.forEach(async (photo, i) => {
+      const res = await fetch(this._data[i]);
+      const blob = await res.blob();
+
+      const markup = `
+      <img
+      src="${URL.createObjectURL(blob)}"
+      alt="Gallery photo" />
+      `;
+
+      photo.innerHTML = '';
+      photo.insertAdjacentHTML('afterbegin', markup);
+    });
   }
 
   #generateMarkupPhotoToPost() {
@@ -149,7 +169,7 @@ export class GalleryView extends View {
         </nav>
         <section class="modal__photos">
           <div class="modal__photos-wrapper">
-            ${this.#generateGalleryImages()}
+
           </div>
         </section>
         <footer class="modal__bottom">

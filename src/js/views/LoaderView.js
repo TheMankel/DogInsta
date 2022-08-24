@@ -2,10 +2,10 @@ import View from './View';
 import icons from '../../img/icons.svg';
 
 export class LoaderView extends View {
-  _parentElement = document.querySelector('.posts');
-
-  constructor() {
+  constructor(element = 'posts') {
     super();
+
+    this._parentElement = document.querySelector(`.${element}`);
 
     this.render('beforeend');
   }
@@ -20,7 +20,7 @@ export class LoaderView extends View {
   // }
 
   destroy() {
-    document.querySelector('.loading__spinner').remove();
+    this._parentElement.querySelector('.loading__spinner').remove();
   }
 
   _generateMarkup() {
