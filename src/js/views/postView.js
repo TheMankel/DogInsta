@@ -9,7 +9,8 @@ export class PostView extends View {
   constructor(data, postPlace = 'beforeend') {
     super();
 
-    this.render(data, postPlace);
+    this._data = data;
+    this.render(postPlace);
 
     this._moreBtn = this._thisElement.querySelector('.btn--more');
     this._likeBtn = this._thisElement.querySelector('.btn--favorite');
@@ -48,22 +49,7 @@ export class PostView extends View {
   }
 
   addHandlerObserver(handler) {
-    const callback = (entries) => {
-      if (entries[0].intersectionRatio === 1) {
-        handler();
-        observer.unobserve(entries[0].target);
-      }
-    };
-
-    const options = {
-      root: null,
-      rootMargin: '0px',
-      threshold: [0.25, 0.5, 0.75, 1],
-    };
-
-    const observer = new IntersectionObserver(callback, options);
-
-    observer.observe(this._thisElement);
+    handler(this._thisElement);
   }
 
   #likeButtonHandler() {
@@ -120,7 +106,7 @@ export class PostView extends View {
       </section>
       <div class="modal__nav-bottom">
         <img
-          src="${this._account._profilePicture}"
+          src="${this._account.profilePicture}"
           alt="Post photo" />
         <input class="modal__comments-name" placeholder="Add comment..." type="text" autocorrect="off" autocomplete="off"></input>
         <button class="btn-tiny modal__nav--post">Send</button>
@@ -183,9 +169,9 @@ export class PostView extends View {
     const markup = `
       <div class="modal__comments-comment">
         <img
-          src="${this._account._profilePicture}"
+          src="${this._account.profilePicture}"
           alt="Post photo" />
-        <span class="modal__comments-name">${this._account._username}</span>
+        <span class="modal__comments-name">${this._account.username}</span>
         <p class="modal__comments-text">${comment}</p>
       </div>
     `;
@@ -198,8 +184,8 @@ export class PostView extends View {
 
     // const newCommentObj = {
     //   comment: comment,
-    //   name: this._account._username,
-    //   picture: this._account._profilePicture,
+    //   name: this._account.username,
+    //   picture: this._account.profilePicture,
     // };
     const newCommentObject = this.#createNewCommentObject(comment);
 
@@ -223,8 +209,8 @@ export class PostView extends View {
   #createNewCommentObject(comment) {
     return {
       comment: comment,
-      name: this._account._username,
-      picture: this._account._profilePicture,
+      name: this._account.username,
+      picture: this._account.profilePicture,
     };
   }
 
@@ -254,10 +240,10 @@ export class PostView extends View {
 
   #bookmarkButtonHandler() {
     if (this._bookmarkBtn.getAttribute('data-filled') === 'true') {
-      const index = this._account._bookmarks.indexOf(this._data);
-      this._account._bookmarks.splice(index, 1);
+      const index = this._account.bookmarks.indexOf(this._data);
+      this._account.bookmarks.splice(index, 1);
     } else {
-      this._account._bookmarks.push(this._data);
+      this._account.bookmarks.push(this._data);
     }
 
     this.#toggleButtonFill(this._bookmarkBtn, 'bookmark');
