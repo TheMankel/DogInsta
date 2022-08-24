@@ -1,8 +1,6 @@
 export default class View {
-  render(data, postPlace) {
-    if (!data) return this.renderError();
-
-    this._data = data;
+  render(postPlace) {
+    if (!this._data) return this.renderError();
 
     const markup = this._generateMarkup();
 
