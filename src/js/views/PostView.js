@@ -6,19 +6,10 @@ export class PostView extends View {
   _errorMessage = 'We could not load this post 😥';
   _message = 'This function is unsupported. Have some balloons 🎈🎈';
 
-  constructor(data, postPlace = 'beforeend') {
+  constructor(data) {
     super();
 
     this._data = data;
-    this.render(postPlace);
-
-    this._moreBtn = this._thisElement.querySelector('.btn--more');
-    this._likeBtn = this._thisElement.querySelector('.btn--favorite');
-    this._commentBtn = this._thisElement.querySelector('.btn--comment');
-    this._sendBtn = this._thisElement.querySelector('.btn--send');
-    this._bookmarkBtn = this._thisElement.querySelector('.btn--bookmark');
-
-    this.#initButtons();
   }
 
   // addHandlerRender(handler) {
@@ -31,7 +22,13 @@ export class PostView extends View {
   //   });
   // }
 
-  #initButtons() {
+  initButtons() {
+    this._moreBtn = this._thisElement.querySelector('.btn--more');
+    this._likeBtn = this._thisElement.querySelector('.btn--favorite');
+    this._commentBtn = this._thisElement.querySelector('.btn--comment');
+    this._sendBtn = this._thisElement.querySelector('.btn--send');
+    this._bookmarkBtn = this._thisElement.querySelector('.btn--bookmark');
+
     this._moreBtn.addEventListener(
       'click',
       this.renderMessage.bind(this, this.message),
