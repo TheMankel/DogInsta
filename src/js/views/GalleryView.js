@@ -72,7 +72,11 @@ export class GalleryView extends View {
     }
 
     const data = this.#generatePostDataObject(description);
-    const post = new PostView(data, 'afterbegin');
+    const post = new PostView(data);
+
+    post.render('afterbegin');
+
+    post.initButtons();
 
     post.addHandlerAccount(this._account);
 

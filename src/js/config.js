@@ -16,7 +16,7 @@
 
 export const DOG_API_URL = 'https://dog.ceo/api/breeds/image/random';
 export const USER_API_URL = 'https://randomuser.me/api/';
-export const QUOTE_API_URL = 'https://favqs.com/api/qotd';
+// export const QUOTE_API_URL = 'https://favqs.com/api/qotd';
 export const ALT_QUOTE_API_URL = 'https://quotable.io/quotes';
 export const MAX_LENGTH = 50;
 export const MIN_LENGTH = 30;

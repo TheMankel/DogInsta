@@ -2,8 +2,6 @@ import icons from '../../img/icons.svg';
 
 export default class View {
   render(postPlace) {
-    if (!this._data) return this.renderError();
-
     const markup = this._generateMarkup();
 
     this._parentElement.insertAdjacentHTML(postPlace, markup);

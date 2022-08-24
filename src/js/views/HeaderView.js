@@ -24,7 +24,7 @@ export class HeaderView extends View {
     if (!btn) return;
 
     if (btn.classList.contains('nav__btn--add-post')) {
-      const gallery = new GalleryView(USER_IMAGES, 'afterbegin');
+      const gallery = new GalleryView(USER_IMAGES);
       gallery.addHandlerAccount(this._account);
       // this.render(USER_IMAGES, 'afterbegin');
       // this.#initPostPhotoButtons();

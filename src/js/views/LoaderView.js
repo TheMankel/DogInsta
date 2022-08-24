@@ -7,7 +7,6 @@ export class LoaderView extends View {
   constructor() {
     super();
 
-    this._data = 'null';
     this.render('beforeend');
   }
 
