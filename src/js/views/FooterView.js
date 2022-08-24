@@ -27,13 +27,13 @@ export class FooterView extends View {
       case btn.classList.contains('nav__btn--home-page'):
         // window.history.pushState(null, '', `/`);
         this.feedScrollTop();
-        window.location.href = '/';
+        // window.location.href = '/';
         break;
       case btn.classList.contains('nav__btn--account'):
         console.log(this);
         // window.history.pushState(null, '', `/user`);
-        window.location.href = `${this._account._username}`;
-        this._account.render('siusiaki', 'afterbegin');
+        // window.location.href = `${this._account._username}`;
+        // this._account.render('siusiaki', 'afterbegin');
         break;
       default:
         this.renderMessage();

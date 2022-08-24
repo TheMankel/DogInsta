@@ -39,6 +39,10 @@ class Controller {
     // model.state.account = new AccountView();
     post.addHandlerAccount(model.state.account);
   }
+
+  controlAddNewPost() {
+    const newPost = new GalleryView();
+  }
 }
 
 new Controller();
