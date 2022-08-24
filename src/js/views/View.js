@@ -43,11 +43,19 @@ export default class View {
       .querySelector('.container')
       .insertAdjacentHTML('afterbegin', markup);
 
-    document
-      .querySelector('.modal__unsupported button')
-      .addEventListener('click', function () {
-        document.querySelector('.modal__unsupported').remove();
-      });
+    const modal = document.querySelector('.modal__unsupported');
+    const button = document.querySelector('.modal__unsupported button');
+
+    button.focus();
+
+    button.addEventListener('click', function () {
+      modal.remove();
+    });
+
+    modal.addEventListener('keydown', function (e) {
+      console.log(e.key);
+      if (e.key === 'Tab') e.preventDefault();
+    });
   }
 
   addHandlerAccount(account) {
