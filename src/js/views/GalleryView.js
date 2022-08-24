@@ -8,7 +8,8 @@ export class GalleryView extends View {
   constructor(data) {
     super();
 
-    this.render(data, 'afterbegin');
+    this._data = data;
+    this.render('afterbegin');
     this.#init();
   }
 
@@ -75,15 +76,15 @@ export class GalleryView extends View {
 
     post.addHandlerAccount(this._account);
 
-    this._account._posts.push(post);
+    this._account.posts.push(post);
 
     this._modal.remove();
   }
 
   #generatePostDataObject(description) {
     return {
-      username: this._account._username,
-      picture: this._account._profilePicture,
+      username: this._account.username,
+      picture: this._account.profilePicture,
       postImage: this._selectedImgSrc,
       description: description,
       comments: [],
