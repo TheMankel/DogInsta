@@ -8,14 +8,14 @@ export class AccountView extends View {
   constructor() {
     super();
 
-    this._username = 'User';
-    this._profilePicture =
-      'https://avatars.githubusercontent.com/u/26410548?v=4';
-    this._bio = 'Someone cool 😎';
-    this._posts = [];
-    this._fallowers = 21;
-    this._following = 37;
-    this._bookmarks = [];
+    // this._username = 'User';
+    // this._profilePicture =
+    //   'https://avatars.githubusercontent.com/u/26410548?v=4';
+    // this._bio = 'Someone cool 😎';
+    // this._posts = [];
+    // this._fallowers = 21;
+    // this._following = 37;
+    // this._bookmarks = [];
 
     // username: 'User',
     // profilePicture: 'https://avatars.githubusercontent.com/u/26410548?v=4',
@@ -30,7 +30,7 @@ export class AccountView extends View {
     return `
       <header class="header hidden">
         <div class="header__account">
-          <span class="header__account-username">${this._username}</span>
+          <span class="header__account-username">${this._account.username}</span>
         </div>
         <nav class="nav">
           <ul class="nav__list">
