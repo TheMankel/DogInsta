@@ -63,12 +63,10 @@
         &:nth-child(3n + 3) {
           padding-right: 0;
         }
-        img {
-          display: flex;
-        }
       }
 
       img {
+        display: flex;
         border: none;
         border-radius: 0%;
         width: 100%;

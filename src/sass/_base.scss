@@ -11,6 +11,11 @@
     width: 24px;
   }
 
+  ::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 0;
+  }
+
   @media screen and (min-width: 512px) {
     svg {
       height: 32px;
