@@ -27,9 +27,13 @@ export class AccountView extends View {
   }
 
   _generateMarkup() {
+    // <img
+    // src="${this._account.posts[0]._data.postImage}"
+    // alt="Gallery photo" />
+
     return `
-      <div class="account">
-        <header class="header hidden">
+      <div class="account hidden">
+        <header class="header">
           <div class="header__account">
             <span class="header__account-username">${this._account.username}</span>
           </div>
@@ -52,8 +56,55 @@ export class AccountView extends View {
             </ul>
           </nav>
         </header>
-        <main class="account hidden">
-
+        <main class="profile">
+          <div class="profile__data">
+            <div class="profile__data-user">
+              <img
+                src="${this._account.profilePicture}"
+                alt="Account icon"
+                class="profile__data-img" />
+              <p class="profile__data-name">${this._account.fullname}</p>
+            </div>
+            <ul class="profile__data-list">
+              <li class="profile__data-item">
+                <span>${this._account.posts.length}</span>
+                <p>Posts</p>
+              </li>
+              <li class="profile__data-item">
+                <span>${this._account.followers}</span>
+                <p>Followers</p>
+              </li>
+              <li class="profile__data-item">
+                <span>${this._account.following}</span>
+                <p>Following</p>
+              </li>
+            </ul>
+          </div>
+          <div class="profile__posts">
+            <nav class="profile__posts-nav">
+              <ul class="profile__posts-nav--list">
+                <li class="profile__posts-nav--item">
+                  <button class="btn-tiny nav__btn--grid">
+                    <svg>
+                      <use href="${icons}#icon-grid"></use>
+                    </svg>
+                  </button>
+                </li>
+                <li class="nav__item">
+                  <button class="btn-tiny nav__btn--tags">
+                    <svg>
+                      <use href="${icons}#icon-tags"></use>
+                    </svg>
+                  </button>
+                </li>
+              </ul>
+            </nav>
+            <div class="profile__posts-wrapper">
+              <div class="profile__posts-img">
+                
+              </div>
+            </div>
+          </div>
         </main>
       </div>
     `;
