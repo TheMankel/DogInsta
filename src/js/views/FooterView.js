@@ -2,18 +2,23 @@ import View from './View';
 import { AccountView } from './AccountView';
 
 export class FooterView extends View {
+  _parentElement = document.querySelector('.container');
   _message = 'This function is unsupported. Have some balloons 🎈🎈';
 
   constructor() {
     super();
 
     this.#init();
-    this.footer.addEventListener('click', this.#clickBtnHandler.bind(this));
+    this._footerElement.addEventListener(
+      'click',
+      this.#clickBtnHandler.bind(this),
+    );
   }
 
   #init() {
-    this.footer = document.querySelector('.footer');
-    this.footerBtns = [...this.footer.querySelectorAll('button')];
+    this._footerElement = this._parentElement.querySelector('.footer');
+    // this._footerBtns = [...this._footerElement.querySelectorAll('button')];
+    this._homeElement = this._parentElement.querySelector('.home');
   }
 
   #clickBtnHandler(e) {
@@ -29,16 +34,24 @@ export class FooterView extends View {
         // window.history.pushState(null, '', `/`);
         this.feedScrollTop();
         // window.location.href = '/';
+        if (this._accountElement) {
+          this._accountElement.classList.add('hidden');
+          this._homeElement.classList.remove('hidden');
+        }
         break;
       case btn.classList.contains('nav__btn--account'):
         console.log(this._account);
         // window.history.pushState(null, '', `/user`);
         // window.location.href = `${this._account._username}`;
-        // const account = new AccountView();
-        // account.addHandlerAccount(this._account);
-        // account.render('afterbegin');
 
-        // this._account.render('siusiaki', 'afterbegin');
+        if (!document.querySelector('.account')) {
+          const account = new AccountView();
+          account.addHandlerAccount(this._account);
+          account.render('afterbegin');
+          this._accountElement = this._parentElement.querySelector('.account');
+        }
+        this._accountElement.classList.remove('hidden');
+        this._homeElement.classList.add('hidden');
         break;
       default:
         this.renderMessage();
