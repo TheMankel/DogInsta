@@ -7,18 +7,19 @@
   height: 100%;
   background-color: #ffffff;
   z-index: 5;
+  overflow-y: scroll;
 
   img {
-    height: 48px;
-    width: 48px;
+    height: 32px;
+    width: 32px;
     border-radius: 50%;
     border: 1px solid #bfbfbf;
   }
 
-  @media screen and (max-width: 513px) {
+  @media screen and (min-width: 512px) {
     img {
-      height: 32px;
-      width: 32px;
+      height: 48px;
+      width: 48px;
     }
   }
 
@@ -43,13 +44,11 @@
     &__comments {
       height: 100%;
       width: 100%;
-      overflow-y: scroll;
     }
 
     &__post,
     &__comments-comment {
       display: flex;
-      justify-content: space-between;
       align-items: center;
       padding: 8px 12px;
       width: 100%;
@@ -67,7 +66,9 @@
         // overflow-wrap: break-word;
       }
       p {
-        width: 100%;
+        text-align: justify;
+        overflow: hidden;
+        overflow-wrap: break-word;
       }
     }
 

@@ -23,16 +23,16 @@
         gap: 12px;
 
         &--img {
-          height: 48px;
-          width: 48px;
+          height: 32px;
+          width: 32px;
           border-radius: 50%;
           border: 1px solid #bfbfbf;
         }
 
-        @media screen and (max-width: 513px) {
+        @media screen and (min-width: 512px) {
           &--img {
-            height: 32px;
-            width: 32px;
+            height: 48px;
+            width: 48px;
           }
         }
       }
@@ -84,6 +84,8 @@
         }
         span {
           text-align: justify;
+          overflow: hidden;
+          overflow-wrap: break-word;
         }
         &-username {
           font-weight: 600;

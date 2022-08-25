@@ -16,11 +16,23 @@
       height: 32px;
       width: 32px;
     }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #a8a8a8;
+    }
   }
 }
 
 body {
-  // font-family: 'Montserrat', sans-serif;
   font-family: 'Noto Sans', 'Dancing Script', sans-serif;
   font-weight: 400;
   line-height: 1.5;
@@ -29,19 +41,19 @@ body {
   justify-content: center;
   align-items: center;
   // height: 100vh;
-  // min-height: 100vh;
   max-height: 100vh;
   max-height: -webkit-fill-available;
+  max-height: -moz-available;
 }
 
 html {
   height: -webkit-fill-available;
+  height: -moz-available;
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  // max-height: 900px;
   max-width: 470px;
   overflow: hidden;
   width: 100%;
