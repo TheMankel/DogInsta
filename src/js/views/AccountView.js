@@ -28,32 +28,34 @@ export class AccountView extends View {
 
   _generateMarkup() {
     return `
-      <header class="header hidden">
-        <div class="header__account">
-          <span class="header__account-username">${this._account.username}</span>
-        </div>
-        <nav class="nav">
-          <ul class="nav__list">
-            <li class="nav__item">
-              <button class="btn-tiny nav__btn--add-post">
-                <svg>
-                  <use href="${icons}#icon-add"></use>
-                </svg>
-              </button>
-            </li>
-            <li class="nav__item">
-              <button class="btn-tiny nav__btn--bookmarks-show">
-                <svg>
-                  <use href="${icons}#icon-bookmark"></use>
-                </svg>
-              </button>
-            </li>
-          </ul>
-        </nav>
-      </header>
-      <main class="account hidden">
+      <div class="account">
+        <header class="header hidden">
+          <div class="header__account">
+            <span class="header__account-username">${this._account.username}</span>
+          </div>
+          <nav class="nav">
+            <ul class="nav__list">
+              <li class="nav__item">
+                <button class="btn-tiny nav__btn--add-post">
+                  <svg>
+                    <use href="${icons}#icon-add"></use>
+                  </svg>
+                </button>
+              </li>
+              <li class="nav__item">
+                <button class="btn-tiny nav__btn--bookmarks-show">
+                  <svg>
+                    <use href="${icons}#icon-bookmark"></use>
+                  </svg>
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </header>
+        <main class="account hidden">
 
-      </main>
+        </main>
+      </div>
     `;
   }
 }

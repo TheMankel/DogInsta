@@ -36,7 +36,7 @@ export class FooterView extends View {
         // window.location.href = `${this._account._username}`;
         // const account = new AccountView();
         // account.addHandlerAccount(this._account);
-        // account.render('siusiaki', 'afterbegin');
+        // account.render('afterbegin');
 
         // this._account.render('siusiaki', 'afterbegin');
         break;
