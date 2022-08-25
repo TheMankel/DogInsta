@@ -15,10 +15,11 @@ export const state = {
   post: {},
   account: {
     username: 'User',
+    fullname: 'User Name',
     profilePicture: 'https://avatars.githubusercontent.com/u/26410548?v=4',
     bio: 'Someone cool 😎',
     posts: [],
-    fallowers: '21',
+    followers: '21',
     following: '37',
     bookmarks: [],
   },
