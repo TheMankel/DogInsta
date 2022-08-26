@@ -63,6 +63,8 @@ export class AccountView extends View {
 
   #generatePhotos() {
     const markup = this._account.posts
+      .slice()
+      .reverse()
       .map((post) => {
         return `<div class="profile__posts-img">
         <img
