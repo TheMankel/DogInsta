@@ -81,15 +81,23 @@ html {
       }
     }
 
-    .header__account span {
+    .header__account span,
+    .header__bookmarks span,
+    .modal__nav-top--left {
       font-size: 24px;
     }
 
     .post,
-    .modal {
+    .modal__comments-wrapper {
       span,
       p {
         font-size: 16px;
+      }
+    }
+
+    .btn-tiny {
+      &:hover {
+        opacity: 50%;
       }
     }
   }
@@ -100,10 +108,6 @@ html {
   align-items: center;
   transition: all 0.25s;
   cursor: pointer;
-
-  &:hover {
-    opacity: 50%;
-  }
 }
 
 .hidden {
