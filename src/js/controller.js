@@ -106,7 +106,7 @@ const controlPosts = async function () {
 };
 
 const addObserver = function (post) {
-  console.log(post);
+  // console.log(post);
   const callback = (entries) => {
     if (entries[0].intersectionRatio === 1) {
       controlPosts();

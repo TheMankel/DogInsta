@@ -29,7 +29,6 @@ export class PostView extends View {
     this._sendBtn = this._thisElement.querySelector('.btn--send');
     this._bookmarkBtn = this._thisElement.querySelector('.btn--bookmark');
     this._commentSection = this._thisElement.querySelector('.post__comments');
-    console.log(this._commentSection);
 
     this._moreBtn.addEventListener(
       'click',

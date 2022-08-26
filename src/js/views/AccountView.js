@@ -36,7 +36,6 @@ export class AccountView extends View {
       'click',
       this.#clickBtnHandler.bind(this),
     );
-    console.log(this._thisElement);
   }
 
   #clickBtnHandler(e) {
