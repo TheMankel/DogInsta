@@ -76,7 +76,7 @@ export class BookmarksView extends View {
     <div class="saved__posts-message">
       <span>
         <svg>
-          <use href="${icons}#icon-bookmark"></use>
+          <use href="${icons}#icon-bookmark-fill"></use>
         </svg>
       </span>
       <p class="saved__posts-message--middle">Nothing saved yet</p>
