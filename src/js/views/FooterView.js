@@ -66,6 +66,10 @@ export class FooterView extends View {
           .querySelector('.nav__btn--home-page use')
           .setAttribute('href', `${icons}#icon-home-page`);
 
+        if (document.querySelector('.bookmarks')) {
+          document.querySelector('.bookmarks').remove();
+        }
+
         break;
       default:
         this.renderMessage();
