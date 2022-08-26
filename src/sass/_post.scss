@@ -90,6 +90,13 @@
         .post__description {
           details > summary {
             list-style: none;
+            content: '';
+          }
+
+          ::marker {
+            display: none;
+            list-style: none;
+            content: '';
           }
 
           details[open] > summary {
