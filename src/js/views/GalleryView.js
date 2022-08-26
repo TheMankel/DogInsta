@@ -70,7 +70,7 @@ export class GalleryView extends View {
     const description = textarea.value.trim();
 
     if (!description) {
-      input.value = '';
+      textarea.value = '';
       return;
     }
 
@@ -84,6 +84,25 @@ export class GalleryView extends View {
     post.addHandlerAccount(this._account);
 
     this._account.posts.push(post);
+
+    if (document.querySelector('.account')) {
+      const markup = this._account.posts
+        .slice()
+        .reverse()
+        .map((post) => {
+          return `<div class="profile__posts-img">
+        <img
+        src="${post._data.postImage}"
+        alt="Gallery photo" />
+      </div> `;
+        })
+        .join('');
+
+      const wrapper = document.querySelector('.profile__posts-wrapper');
+
+      wrapper.innerHTML = '';
+      wrapper.insertAdjacentHTML('afterbegin', markup);
+    }
 
     this._modal.remove();
   }

@@ -35,7 +35,7 @@ export class FooterView extends View {
         this.feedScrollTop();
         // window.location.href = '/';
         if (this._accountElement) {
-          this._accountElement.remove();
+          this._accountElement.classList.add('hidden');
           this._homeElement.classList.remove('hidden');
         }
         break;
