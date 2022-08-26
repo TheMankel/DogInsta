@@ -5,6 +5,7 @@ import { LoaderView } from './LoaderView';
 
 export class GalleryView extends View {
   _parentElement = document.querySelector('.container');
+  _errorMessage = 'We could not load this image 😥';
 
   constructor(data) {
     super();
@@ -136,17 +137,24 @@ export class GalleryView extends View {
     const photoPlaces = this._modal.querySelectorAll('.modal__photos-img');
 
     photoPlaces.forEach(async (photo, i) => {
-      const res = await fetch(this._data[i]);
-      const blob = await res.blob();
+      try {
+        const res = await fetch(this._data[i]);
+        const blob = await res.blob();
 
-      const markup = `
-      <img
-      src="${URL.createObjectURL(blob)}"
-      alt="Gallery photo" />
-      `;
+        if (!res.ok) throw new Error(this._errorMessage);
 
-      photo.innerHTML = '';
-      photo.insertAdjacentHTML('afterbegin', markup);
+        const markup = `
+        <img
+        src="${URL.createObjectURL(blob)}"
+        alt="Gallery photo" />
+        `;
+
+        photo.innerHTML = '';
+        photo.insertAdjacentHTML('afterbegin', markup);
+      } catch (err) {
+        console.error(err);
+        photo.remove();
+      }
     });
   }
 
