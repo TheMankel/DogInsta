@@ -1,11 +1,13 @@
 import View from './View';
+import { GalleryView } from './GalleryView';
 import icons from '../../img/icons.svg';
+import { USER_IMAGES } from '../config';
 
 export class AccountView extends View {
   _parentElement = document.querySelector('.container');
   _message = 'This function is unsupported. Have some balloons 🎈🎈';
 
-  constructor() {
+  constructor(data) {
     super();
 
     // this._username = 'User';
@@ -24,7 +26,41 @@ export class AccountView extends View {
     // fallowers: '21',
     // following: '37',
     // bookmarks: [],
+    this._account = data;
+    this.render('afterbegin');
+    this.#init();
   }
+
+  #init() {
+    this._thisElement.addEventListener(
+      'click',
+      this.#clickBtnHandler.bind(this),
+    );
+    console.log(this._thisElement);
+  }
+
+  #clickBtnHandler(e) {
+    const btn = e.target.closest('button');
+    const p = e.target.closest('p');
+
+    if (!btn && !p) return;
+
+    switch (true) {
+      case btn?.classList.contains('nav__btn--add-post'):
+      case p?.classList.contains('profile__posts-message--bot'):
+        const gallery = new GalleryView(USER_IMAGES);
+        gallery.addHandlerAccount(this._account);
+
+        break;
+      case btn.classList.contains('nav__btn--grid'):
+        console.log(this._account);
+
+        break;
+      default:
+        this.renderMessage();
+    }
+  }
+
   #generatePhotos() {
     const markup = this._account.posts
       .map((post) => {
@@ -38,6 +74,17 @@ export class AccountView extends View {
 
     return markup;
   }
+
+  #generateText() {
+    return `
+    <div class="profile__posts-message">
+      <p class="profile__posts-message--top">Profile</p>
+      <p class="profile__posts-message--middle">When you share photos and videos, they'll appear on your profile.</p>
+      <p class="profile__posts-message--bot">Share your photo or video</p>
+    </div>
+    `;
+  }
+
   _generateMarkup() {
     // <img
     // src="${this._account.posts[0]._data.postImage}"
@@ -109,7 +156,7 @@ export class AccountView extends View {
                     </svg>
                   </button>
                 </li>
-                <li class="nav__item">
+                <li class="profile__posts-nav--item">
                   <button class="btn-tiny nav__btn--tags">
                     <svg>
                       <use href="${icons}#icon-tags"></use>
@@ -119,7 +166,7 @@ export class AccountView extends View {
               </ul>
             </nav>
             <div class="profile__posts-wrapper">
-              ${this.#generatePhotos() || 'You have no posts yet'}
+              ${this.#generatePhotos() || this.#generateText()}
             </div>
           </div>
         </main>
