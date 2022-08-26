@@ -90,13 +90,11 @@
         .post__description {
           details > summary {
             list-style: none;
-            content: '';
+            // content: '';
           }
 
-          ::marker {
+          details summary::-webkit-details-marker {
             display: none;
-            list-style: none;
-            content: '';
           }
 
           details[open] > summary {
@@ -121,6 +119,7 @@
 
         .post__comments {
           font-weight: 600;
+          cursor: pointer;
         }
       }
 

@@ -93,13 +93,6 @@
         font-size: 14px;
       }
 
-      @media screen and (min-width: 512px) {
-        span,
-        p {
-          font-size: 16px;
-        }
-      }
-
       @media screen and (max-width: 375px) {
         &-top {
           padding: 4px 8px;
@@ -145,11 +138,11 @@
           border-bottom: 2px solid #ededed;
 
           svg {
-            fill: #929292;
+            fill: #aaaaaa;
           }
 
           &:first-child {
-            border-bottom: 2px solid #464646;
+            border-bottom: 2px solid #454545;
 
             svg {
               fill: #000000;
@@ -166,6 +159,7 @@
         display: flex;
         flex-wrap: wrap;
         padding-top: 2px;
+        width: 100%;
       }
 
       &-img {
@@ -189,6 +183,45 @@
         height: 100%;
         aspect-ratio: 1/1;
         object-fit: cover;
+      }
+
+      &-message {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 64px 0;
+
+        p {
+          display: flex;
+          justify-content: center;
+          text-align: center;
+          font-size: 14px;
+          width: 80%;
+          padding: 4px 0;
+          color: #aaaaaa;
+
+          &:first-of-type {
+            font-weight: 600;
+            font-size: 16px;
+            color: #000000;
+          }
+
+          &:last-of-type {
+            font-weight: 500;
+            color: #0095f6;
+          }
+
+          &.profile__posts-message--bot {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    @media screen and (min-width: 512px) {
+      span,
+      p {
+        font-size: 16px;
       }
     }
   }
