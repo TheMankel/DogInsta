@@ -1,0 +1,135 @@
+.bookmarks {
+  display: flex;
+  flex-direction: column;
+  max-width: 470px;
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+
+  .header {
+    padding: 10px 16px;
+    border: none;
+
+    &__bookmarks {
+      display: flex;
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+
+      &-title {
+        font-weight: 600;
+        font-size: 20px;
+      }
+    }
+  }
+
+  .saved {
+    &__posts {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+
+      &-nav {
+        width: 100%;
+
+        ul {
+          list-style: none;
+          display: flex;
+          // justify-content: center;
+          // align-items: center;
+          width: 100%;
+        }
+
+        li {
+          display: flex;
+          justify-content: center;
+          padding: 8px;
+          width: 100%;
+          border-bottom: 2px solid #ededed;
+
+          svg {
+            fill: #aaaaaa;
+          }
+
+          &:first-child {
+            border-bottom: 2px solid #454545;
+
+            svg {
+              fill: #000000;
+            }
+          }
+        }
+
+        // svg {
+        //   fill: #929292;
+        // }
+      }
+
+      &-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        padding-top: 2px;
+        width: 100%;
+      }
+
+      &-img {
+        width: calc(100% / 3);
+        padding: 0 1px 2px;
+
+        &:nth-child(3n + 1) {
+          padding-left: 0;
+        }
+
+        &:nth-child(3n + 3) {
+          padding-right: 0;
+        }
+      }
+
+      img {
+        display: flex;
+        border: none;
+        border-radius: 0%;
+        width: 100%;
+        height: 100%;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+      }
+
+      &-message {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 64px 0;
+        width: 100%;
+
+        p {
+          display: flex;
+          justify-content: center;
+          text-align: center;
+          font-size: 14px;
+          width: 80%;
+          padding: 4px 0;
+          color: #aaaaaa;
+
+          &:first-of-type {
+            font-weight: 600;
+            font-size: 16px;
+            color: #000000;
+
+            @media screen and (min-width: 512px) {
+              font-size: 20px;
+            }
+          }
+
+          &.profile__posts-message--bot {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

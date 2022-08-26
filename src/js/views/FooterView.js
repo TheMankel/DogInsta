@@ -1,5 +1,6 @@
 import View from './View';
 import { AccountView } from './AccountView';
+import icons from '../../img/icons.svg';
 
 export class FooterView extends View {
   _parentElement = document.querySelector('.container');
@@ -31,26 +32,46 @@ export class FooterView extends View {
 
     switch (true) {
       case btn.classList.contains('nav__btn--home-page'):
-        // window.history.pushState(null, '', `/`);
         this.feedScrollTop();
-        // window.location.href = '/';
+
+        btn
+          .querySelector('use')
+          .setAttribute('href', `${icons}#icon-home-page-fill`);
+
+        this._footerElement
+          .querySelector('.nav__btn--account use')
+          .setAttribute('href', `${icons}#icon-account`);
+
         if (this._accountElement) {
           this._accountElement.classList.add('hidden');
           this._homeElement.classList.remove('hidden');
         }
+
+        if (document.querySelector('.bookmarks')) {
+          document.querySelector('.bookmarks').remove();
+        }
+
         break;
       case btn.classList.contains('nav__btn--account'):
         console.log(this._account);
-        // window.history.pushState(null, '', `/user`);
-        // window.location.href = `${this._account._username}`;
 
         if (!document.querySelector('.account')) {
           const account = new AccountView(this._account);
           // account.addHandlerAccount(this._account);
           this._accountElement = this._parentElement.querySelector('.account');
         }
+
         this._accountElement.classList.remove('hidden');
         this._homeElement.classList.add('hidden');
+
+        btn
+          .querySelector('use')
+          .setAttribute('href', `${icons}#icon-account-fill`);
+
+        this._footerElement
+          .querySelector('.nav__btn--home-page use')
+          .setAttribute('href', `${icons}#icon-home-page`);
+
         break;
       default:
         this.renderMessage();

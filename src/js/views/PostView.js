@@ -96,15 +96,17 @@ export class PostView extends View {
           </button>
         </div>
       </div>
-      <div class="modal__post">
-        <img
-          src="${this._data.picture}"
-          alt="Post photo" />
-        <span class="modal__comments-name">${this._data.username}</span>
-        <p class="modal__comments-text">${this._data.description}</p>
-      </div>
-      <section class="modal__comments">
-        ${this.#generateComments()}
+      <section class="modal__comments-wrapper">
+        <div class="modal__post">
+          <img
+            src="${this._data.picture}"
+            alt="Post photo" />
+          <span class="modal__comments-name">${this._data.username}</span>
+          <p class="modal__comments-text">${this._data.description}</p>
+        </div>
+        <div class="modal__comments">
+          ${this.#generateComments()}
+        </div>
       </section>
       <div class="modal__nav-bottom">
         <img
@@ -242,10 +244,10 @@ export class PostView extends View {
 
   #bookmarkButtonHandler() {
     if (this._bookmarkBtn.getAttribute('data-filled') === 'true') {
-      const index = this._account.bookmarks.indexOf(this._data);
+      const index = this._account.bookmarks.indexOf(this);
       this._account.bookmarks.splice(index, 1);
     } else {
-      this._account.bookmarks.push(this._data);
+      this._account.bookmarks.push(this);
     }
 
     this.#toggleButtonFill(this._bookmarkBtn, 'bookmark');

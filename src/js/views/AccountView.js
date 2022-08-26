@@ -2,6 +2,7 @@ import View from './View';
 import { GalleryView } from './GalleryView';
 import icons from '../../img/icons.svg';
 import { USER_IMAGES } from '../config';
+import { BookmarksView } from './BookmarksView';
 
 export class AccountView extends View {
   _parentElement = document.querySelector('.container');
@@ -51,9 +52,10 @@ export class AccountView extends View {
         gallery.addHandlerAccount(this._account);
 
         break;
-      case btn.classList.contains('nav__btn--grid'):
-        console.log(this._account);
-
+      case btn.classList.contains('nav__btn--bookmarks-show'):
+        const bookmarks = new BookmarksView(this._account);
+        this._thisElement.classList.add('hidden');
+        document.querySelector('.bookmarks').classList.remove('hidden');
         break;
       default:
         this.renderMessage();
