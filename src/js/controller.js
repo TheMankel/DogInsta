@@ -128,7 +128,6 @@ const addObserver = function (post) {
 const init = async function () {
   const header = new HeaderView();
   const footer = new FooterView();
-  // const account = new AccountView();
 
   header.addHandlerAccount(model.state.account);
   footer.addHandlerAccount(model.state.account);

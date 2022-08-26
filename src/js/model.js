@@ -23,13 +23,6 @@ export const state = {
     following: '37',
     bookmarks: [],
   },
-  // username: 'User',
-  //   profilePicture: 'https://avatars.githubusercontent.com/u/26410548?v=4',
-  //   bio: 'Someone cool 😎',
-  //   posts: [],
-  //   fallowers: '21',
-  //   following: '37',
-  //   bookmarks: [],
 };
 
 const createPostData = function (userObject) {
@@ -42,98 +35,6 @@ const createPostData = function (userObject) {
     likesCount: userObject.likesCount,
   };
 };
-
-// const createUserData = async function (amount = 1) {
-//   try {
-//     console.log('amount', amount);
-
-//     const userData = await getJSON(
-//       `${USER_API_URL}?inc=${USER_DATA}&nat=${NAT_ARR}&noinfo&results=${amount}`,
-//     );
-//     // const quoteData = await getJSON(QUOTE_API_URL);
-
-//     // const { results } = userData;
-//     // const { quote } = quoteData;
-
-//     // const userObject = new Object(...results);
-//     // userObject.description = quote.body;
-
-//     const { results } = userData;
-//     console.log(results);
-//     let userObject;
-//     // console.log([userObject].length);
-
-//     if (results.length === 1) {
-//       const quoteData = await getJSON(QUOTE_API_URL);
-
-//       const { quote } = quoteData;
-
-//       userObject = new Object(...results);
-//       console.log(userObject);
-//       userObject.description = quote.body;
-//     } else {
-//       userObject = results.map((res) => new Object(res));
-//       console.log(userObject);
-
-//       for (let i = 0; i < amount; i++) {
-//         const quoteData = await getJSON(QUOTE_API_URL);
-//         const { quote } = quoteData;
-//         userObject[i].description = quote.body;
-//       }
-//     }
-
-//     return userObject;
-//   } catch (err) {
-//     console.error(`${err} 💥💥💥💥`);
-//     throw err;
-//   }
-// };
-
-// export const loadPost = async function () {
-//   try {
-//     // const userData = await getJSON(
-//     //   `${USER_API_URL}?inc=${USER_DATA}&nat=${NAT_ARR}&noinfo`,
-//     // );
-//     // const imageData = await getJSON(DOG_API_URL);
-//     // const quoteData = await getJSON(QUOTE_API_URL);
-
-//     // const { results } = userData;
-//     // const { message } = imageData;
-//     // const { quote } = quoteData;
-
-//     // const userObject = new Object(...results);
-//     // userObject.postImage = message;
-//     // userObject.description = quote.body;
-
-//     const imageData = await getJSON(DOG_API_URL);
-//     const { message } = imageData;
-
-//     const userObject = await createUserData();
-//     userObject.postImage = message;
-//     userObject.comments = [];
-//     userObject.likesCount = getRandomInt(0, 10000);
-
-//     const commentsCount = getRandomInt(1, 3);
-
-//     // for (let i = 0; i < commentsCount; i++) {
-//     //   // const quoteData = await getJSON(QUOTE_API_URL);
-//     //   // const { quote } = quoteData;
-
-//     //   // userObject.comments.push(quote.body);
-
-//     //   const userComment = await createUserData();
-//     //   userObject.comments.push(userComment);
-//     // }
-//     const userComment = await createUserData(2);
-//     userObject.comments = userComment;
-
-//     createPostData(userObject);
-//     console.log(state.post);
-//   } catch (err) {
-//     console.error(`${err} 💥💥💥💥`);
-//     throw err;
-//   }
-// };
 
 // export const addBookmark = function (bookmark) {
 //   state.bookmarks.push(bookmark);

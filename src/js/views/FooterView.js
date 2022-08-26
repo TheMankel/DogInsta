@@ -18,17 +18,12 @@ export class FooterView extends View {
 
   #init() {
     this._footerElement = this._parentElement.querySelector('.footer');
-    // this._footerBtns = [...this._footerElement.querySelectorAll('button')];
     this._homeElement = this._parentElement.querySelector('.home');
   }
 
   #clickBtnHandler(e) {
     const btn = e.target.closest('button');
     if (!btn) return;
-
-    // console.log(btn);
-    // if (btn.classList.contains('nav__btn--home-page')) this.feedScrollTop();
-    // else this.renderMessage();
 
     switch (true) {
       case btn.classList.contains('nav__btn--home-page'):
@@ -56,8 +51,7 @@ export class FooterView extends View {
         console.log(this._account);
 
         if (!document.querySelector('.account')) {
-          const account = new AccountView(this._account);
-          // account.addHandlerAccount(this._account);
+          new AccountView(this._account);
           this._accountElement = this._parentElement.querySelector('.account');
         }
 

@@ -8,22 +8,6 @@ export class BookmarksView extends View {
   constructor(data) {
     super();
 
-    // this._username = 'User';
-    // this._profilePicture =
-    //   'https://avatars.githubusercontent.com/u/26410548?v=4';
-    // this._bio = 'Someone cool 😎';
-    // this._posts = [];
-    // this._fallowers = 21;
-    // this._following = 37;
-    // this._bookmarks = [];
-
-    // username: 'User',
-    // profilePicture: 'https://avatars.githubusercontent.com/u/26410548?v=4',
-    // bio: 'Someone cool 😎',
-    // posts: [],
-    // fallowers: '21',
-    // following: '37',
-    // bookmarks: [],
     this._account = data;
     this.render('afterbegin');
     this.#init();
@@ -86,10 +70,6 @@ export class BookmarksView extends View {
   }
 
   _generateMarkup() {
-    // <img
-    // src="${this._account.posts[0]._data.postImage}"
-    // alt="Gallery photo" />
-
     return `
       <div class="bookmarks hidden">
         <header class="header">

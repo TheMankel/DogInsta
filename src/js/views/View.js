@@ -12,7 +12,6 @@ export default class View {
   }
 
   renderError(message = this._errorMessage) {
-    // console.error(message);
     const markup = `
       <div class="error">
         <div>

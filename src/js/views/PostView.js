@@ -186,18 +186,7 @@ export class PostView extends View {
 
     input.value = '';
 
-    // const newCommentObj = {
-    //   comment: comment,
-    //   name: this._account.username,
-    //   picture: this._account.profilePicture,
-    // };
     const newCommentObject = this.#createNewCommentObject(comment);
-
-    // this._data.comments.push(newComment);
-
-    // this._thisElement.querySelector(
-    //   '.post__comments span',
-    // ).textContent = `View ${this._data.comments.length} comments`;
 
     this.#updateComments(newCommentObject);
   }
@@ -239,7 +228,6 @@ export class PostView extends View {
     document
       .querySelector('.container')
       .insertAdjacentHTML('afterbegin', markup);
-    // this.insertAdjacentHTML('afterbegin', markup);
   }
 
   #bookmarkButtonHandler() {
