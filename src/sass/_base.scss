@@ -7,8 +7,8 @@
 
   svg {
     fill: black;
-    height: 24px;
-    width: 24px;
+    height: 28px;
+    width: 28px;
   }
 
   ::-webkit-scrollbar {
@@ -85,6 +85,7 @@ html {
 
     .header__account span,
     .header__bookmarks span,
+    .modal__nav span,
     .modal__nav-top--left {
       font-size: 24px;
     }
