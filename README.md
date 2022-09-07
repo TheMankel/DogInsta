@@ -28,4 +28,4 @@ Working features:
 - Bookmark post
 - Show user profile
 
-Demo: soon
+Demo: https://doginsta.netlify.app/
