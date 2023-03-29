@@ -4,7 +4,7 @@ Fake Instagram for dogs
 
 I created this Instragram copy (but for dogs) to practice and to test myself in OOP JavaScript.
 
-⚙ Technology stack:
+## Technology stack
 
 - Object oriented JavaScript
 - MVC architectural pattern
@@ -18,7 +18,7 @@ I created this Instragram copy (but for dogs) to practice and to test myself in 
 - SCSS for styling components
 - Parcel bundler
 
-Working features:
+## Working features
 
 - Render random post with infinite scroll
 - Add comments
@@ -27,5 +27,3 @@ Working features:
 - Copy post image URL to clipboard
 - Bookmark post
 - Show user profile
-
-Demo: https://doginsta.netlify.app/
